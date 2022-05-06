@@ -1,0 +1,154 @@
+body {
+    background: black; 
+}
+
+.container{
+    width: 100%;
+    padding-right: var(--bs-gutter-x, 0.75rem);
+    padding-left: var(--bs-gutter-x, 0.75rem);
+    margin-right: auto;
+    margin-left: auto;
+    
+
+}
+.container-box{
+    display: block;
+    align-content: center;
+    padding: 5rem;
+    display:flex;
+    width: 100%;
+    margin: auto;
+    flex-wrap: wrap;
+    align-content: center;
+    background-color: black;
+    border-radius: 1rem;
+    text-align: center;
+}
+
+.box{
+    display: block;
+    text-align: center;
+    padding: 3rem;
+    display:flex;
+    width: 100%;
+    margin: 0rem;
+    flex-wrap: wrap;
+    align-content: center;
+    background-color: black;
+    border-radius: 1rem;
+    margin-top: 3rem;
+    
+}
+  
+.in-flex {
+    flex:2;
+    margin: auto;
+    padding: 3rem;
+    align-content: center;
+}
+/* ------foto perfil--------- */
+.in-flex:first-child {
+    flex:1; 
+    padding: 25px; 
+    background-color: #2a9fd6;
+    margin: auto;
+    max-width: 400px;
+    min-width: 400px;
+    height: 400px;
+    width: auto;
+    border-radius: 1rem;
+    align-content: center;
+
+}
+
+.profile-pic
+{
+    display: block;
+    margin: auto;
+    border-radius: 6rem;
+    height: 200px;
+    width: 200px;
+}
+
+.userdata{
+    text-align: center;
+}
+
+
+/* ------ datos perfil--------- */
+.in-flex div {
+    padding: 10px; 
+   
+    margin: 20px;
+    min-width: 400px;
+  width:auto;
+  border-radius: 1rem;
+}
+
+
+@media (min-width: 200px) {
+    .in-flex, .in-flex:first-child, .in-flex div {
+      margin:auto;
+      flex-direction: column;
+    }
+}
+
+
+ .form-data {
+    display: block;
+    width: 100%;
+    height: 2.5rem;
+    margin: auto;
+    margin-bottom: 0rem;
+    padding: 0.375rem 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #fff;
+    background-color: #555;
+    background-clip: padding-box;
+    border: 0 solid #fff;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-group-pass{
+    display: flex;
+    
+}
+
+.form-pad label{
+    color: white;
+}
+
+.btn-div{
+    display: block;
+margin: auto;
+width: 200px;
+}
+
+
+/*----------editor de articulos------*/
+
+
+.row{
+    display: flex;
+}
+.text-area-content{
+    height: 200px;
+}
+
+.btn-article{
+
+    margin:auto;
+   width: 60%;
+}
+.centered{
+    display: flex;
+    
+  padding-top: 3rem;
+    align-content: center;
+}

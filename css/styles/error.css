@@ -1,0 +1,57 @@
+.formulario_grupo-input{
+    position:relative;
+  }
+  
+  .formulario_input-error{
+    font-size: 13px !important;
+    margin-bottom: 0 !important;
+    display: none ;
+  }
+  .formulario_input-error-activo{
+    display:block !important;
+    color: #da3a3a;
+  }
+  
+  .formulario_validacion-estado{
+    position: absolute;
+    right: 12px;
+    top: 16px;
+    z-index: 100;
+    font-size: 16px;
+    opacity:0;
+  }
+  .formulario_mensaje{
+    height:45px;
+    line-height: 45px;
+    background: #da3a3a;
+    padding: 0 15px;
+    border-radius: 3px;
+    display:none;
+    color:#efefef;
+  }
+  
+  .formulario_mensaje-activo{
+    display:block;
+  }
+  
+  /* Inicio Estilos Validacion*/
+  .formulario_grupo-correcto .formulario_validacion-estado{
+    color: #2a9fd6;
+    opacity: 1;
+  }
+  .formulario_grupo-correcto .formulario_input{
+    border: 3px solid #2a9fd6;
+  }
+  .formulario_grupo-incorrecto .formulario_validacion-estado{
+    color: #da3a3a;
+    opacity: 1;
+  }
+  .formulario_grupo-incorrecto .formulario_label{
+    color: #da3a3a;
+  }
+  
+  .formulario_grupo-incorrecto .formulario_input{
+    border: 3px solid #da3a3a;
+    
+  }
+  /* Fin Estilos Validacion*/
