@@ -107,11 +107,11 @@ formulario.addEventListener('submit', (e)=>{
         document.querySelectorAll('formulario_grupo-correcto').forEach((icono)=>{
             icono.classList.remove('formulario_grupo-correcto');
         });
-        document.getElementById('formulario_mensaje').classList.remove('formulario_mensaje-activo');
+        //document.getElementById('formulario_mensaje').classList.remove('formulario_mensaje-activo');
         
     }else{
         e.preventDefault();
-        document.getElementById('formulario_mensaje').classList.add('formulario_mensaje-activo');
+       // document.getElementById('formulario_mensaje').classList.add('formulario_mensaje-activo');
     }
 })
 
@@ -141,11 +141,13 @@ $(document).on('change','input[type="file"]',function(){
                 document.getElementById(`image_group`).classList.add('formulario_grupo-correcto');
                 document.querySelector(`#image_group i`).classList.remove('fa-times-circle');
                 document.querySelector(`#image_group i`).classList.add('fa-check-circle');
+                console.log(this.value);
 			case 'jpeg':
                 document.getElementById(`image_group`).classList.remove('formulario_grupo-incorrecto');
                 document.getElementById(`image_group`).classList.add('formulario_grupo-correcto');
                 document.querySelector(`#image_group i`).classList.remove('fa-times-circle');
                 document.querySelector(`#image_group i`).classList.add('fa-check-circle');
+                console.log(this.value);
 			case 'png':
                 document.getElementById(`image_group`).classList.remove('formulario_grupo-incorrecto');
                 document.getElementById(`image_group`).classList.add('formulario_grupo-correcto');
@@ -161,6 +163,7 @@ $(document).on('change','input[type="file"]',function(){
 				alert('El archivo no tiene la extensión adecuada');
 				this.value = ''; // reset del valor
 				this.files[0].name = '';
+                
 		}
 	}
 });

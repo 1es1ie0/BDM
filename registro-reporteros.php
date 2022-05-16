@@ -1,12 +1,12 @@
 <?php include ('./templates/header.php')?>
 <?php
 
-include ('classes\loginConn.classes.php');
+//include ('classes\loginConn.classes.php');
 //require ("./classes/dbh.classes.php");
 //require("./classes/loginConn.classes.php");
-$db = new LoginConn();
-$user= $_SESSION["user_email"];
-$data = $db->getUser($user);
+//$db = new LoginConn();
+//$user= $_SESSION["user_email"];
+//$data = $db->getUser($user);
 ?>
 <!doctype html>
 <html lang="en">
@@ -45,7 +45,7 @@ $data = $db->getUser($user);
                  //$user_type=$i["DESCRIPTION"];
                  //if($user_type=="Admin"){
                 ?>
-              <form class="formulario" id="formulario_signIn" action="./includes/registerReportero_inc.php" method="post">
+              <form class="formulario" id="formulario_signIn" action="./includes/registerReportero_inc.php" method="post" enctype="multipart/form-data">
                 <!-- Grupo Correo -->
                 <div class="form-group first formulario_grupo" id="correo_group">
                   <label for="correo" class="formulario_label">Correo electronico</label>
@@ -146,6 +146,6 @@ $data = $db->getUser($user);
   </div>
   <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
   <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
-  <script type="text/javascript" src="js/signin.js"></script>
+  <script type="text/javascript" src="js/signInReporters.js"></script>
   </body>
 </html>
