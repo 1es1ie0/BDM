@@ -4888,18 +4888,20 @@ fieldset:disabled .btn {
   color: #fff;
 }
 
+
 .card {
   position: relative;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
   flex-direction: column;
-  min-width: 0;
+  width: 60%;
   word-wrap: break-word;
   background-color: #282828;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+  margin: auto;
 }
 
 .card > hr {
@@ -11485,6 +11487,17 @@ color:#000;
 
 .btn-dark {
   background-color: #adafae;
+}
+
+.btn-align{
+
+  margin:auto;
+  width: 80%;
+  max-width: 300px;
+}
+
+.margin-center{
+  margin:auto;
 }
 
 legend {

@@ -19,8 +19,6 @@ $data = $db->getUser($user);
         <title>Noticias</title>
         <link rel="stylesheet" href="./css/bootstrap.css" /> 
         
-        
-        
 </head>
 
 <body>
@@ -68,6 +66,7 @@ $data = $db->getUser($user);
                               <?php 
                               if(isset($_SESSION["user_email"])){
                               foreach($data as $i){
+                                $_SESSION["user_id"]=$i["USER_ID"];
                                 $i["USER_PASS"];
                                
                               if(!empty($i["DESCRIPTION"])){
@@ -79,6 +78,10 @@ $data = $db->getUser($user);
                                           <a class="dropdown-item" href="./admin-comentario.php">admin comentario</a>
                                           <a class="dropdown-item" href="./admin-notificaciones.php">admin notificaciones</a>
                                           <a class="dropdown-item" href="./registro-reporteros.php">registro reportero</a>
+                                          <a class="dropdown-item" href="./secciones.php">Secciones</a>
+                                          <a class="dropdown-item" href="./crear_seccion.php">Nueva seccion</a>
+                                          <a class="dropdown-item" href="./editar_seccion.php">Editar seccion</a>
+                                          <a class="dropdown-item" href="./login.php">Cerrar Session</a>
                             <?php
                             }
                             elseif(strcasecmp($i["DESCRIPTION"] , "Reportero")==0) {
@@ -86,13 +89,14 @@ $data = $db->getUser($user);
                             <a class="dropdown-item" href="./profile.php">Perfíl</a>
                             <a class="dropdown-item" href="./publish-article.php">Crear articulo</a>
                             <a class="dropdown-item" href="./reportero-notificaciones.php">reportero notificaciones</a>
-                            
+                            <a class="dropdown-item" href="./reportero-noticias.php">Ver mis noticias</a>
+                            <a class="dropdown-item" href="./login.php">Cerrar Session</a>
                             <?php 
                                 }
                                 elseif(strcasecmp($i["DESCRIPTION"] , "Usuario registrado")==0) {
                             ?>
                                     <a class="dropdown-item" href="./profile.php">Perfíl</a>
-                                    <a class="dropdown-item" href="./includes/logOut_inc.php">Cerrar Session</a>
+                                    <a class="dropdown-item" href="./login.php">Cerrar Session</a>
                             <?php 
                                 } 
                               }

@@ -28,8 +28,7 @@ class RegisterReporteroConn extends Dbh{
             header("location: ../index.php?error=stmtfailed");
             exit();
         }else{
-            session_start();//almacena variables en un historial de navegacion
-            $_SESSION["user_email"] = $email;
+            
         }
         $stmt = null;
     }

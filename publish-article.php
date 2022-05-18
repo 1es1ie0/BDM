@@ -18,23 +18,48 @@
 <body>
     <div class="container">
     <div class="container-box">
+        <form action="./includes/news_inc.php"  method="post" >
         <div class="row align-items-center justify-content-center "> 
 
             <div class="form-group">
                 <label  class="form-label mt-4">Titulo</label>
-                <input  class="form-control"  placeholder="Titulo">
+                <input type="text " id="user_id" name="user_id" value=' <?php echo $_SESSION["user_id"] ?>'>
+                <input type="text"   class="form-control"  id="titulo" name="titulo" placeholder="Ingresa el titulo de la noticia...">
             </div>
             <div class="form-group">
-                <label  class="form-label mt-4">Lugar(Ciudad, Pais)</label>
-                <input  class="form-control"  placeholder="Lugar">
+                <label  class="form-label mt-4">Pais</label>
+                <input type="text"   class="form-control" id="pais" name="pais" placeholder="Pais...">
             </div>
             <div class="form-group">
-                <label  class="form-label mt-4">Comentario de admin</label>
-                <textarea class="form-control text-area-description"  rows="3" placeholder="Deja una retroalimentacion"></textarea>
+                <label  class="form-label mt-4">Colonia</label>
+                <input type="text"   class="form-control" id="colonia"  name="colonia" placeholder="Colonia...">
+            </div>
+            <div class="form-group">
+                <label  class="form-label mt-4">Ciudad<?echo $_SESSION["user_id"]?></label>
+                <input  type="text" class="form-control" id="ciudad" name="ciudad" placeholder="Ciudad...">
+            </div>
+            <?php foreach($data as $i){
+                if(strcasecmp($i["DESCRIPTION"],"Admin")==0){?>
+            <div class="form-group">
+                <label  class="form-label mt-4">Comentario de admin </label>
+                <!--<textarea class="form-control text-area-description"  rows="3" placeholder="Deja una retroalimentacion..."></textarea>-->
+            </div>
+            <?php
+                }
+            } ?>
+             <div class="form-group">
+                <label  class="form-label mt-4">Fecha en la que ocurrieron los eventos</label>
+                <input type="text" class="form-control" id="fecha" name="fecha" placeholder="2022/04/14">
+            </div>
+            <div class="form-group">
+                <label  class="form-label mt-4">Descripcion de la nota</label>
+                <input type="text"id="descripcion" name="descripcion" class="form-control text-area-content"  >
+                <!--<textarea id="descripcion" name="descripcion" class="form-control text-area-content"  rows="3">Contenido...</textarea>-->
             </div>
             <div class="form-group">
                 <label  class="form-label mt-4">Contenido de la nota</label>
-                <textarea class="form-control text-area-content"  rows="3"></textarea>
+                <input type="text"id="text" name="text" class="form-control text-area-content"  >
+                <!--<textarea id="text" name="text" class="form-control text-area-content"  rows="3">Contenido...</textarea>-->
             </div>
 
           
@@ -42,18 +67,18 @@
                 
                     <div class="form-group row">
                         <label for="formFile" class="form-label mt-4">Coloque una imagen</label>
-                        <input class="form-control" type="file" id="formFile">
+                        <input class="form-control" type="file" id="formFile" name="formFile" value="load" >
                         </div>
                     <div class="form-group row">        
                         <label for="formFile" class="form-label mt-4">Coloque un video</label>
-                        <input class="form-control" type="file" id="formFile">
+                        <input class="form-control" type="file" id="formFile" name="formFile" value="load">
                     </div>
               
             </div>
 
             <div class="form-group">
             <label for="formFile" class="form-label mt-4">Palabras clave</label>
-            <input class="form-control form-control-sm" type="text" placeholder="Ingrese palabras clave" >
+            <input type="text" class="form-control form-control-sm" id ="keyword" name="keyword" type="text" placeholder="Ingrese palabras clave..." >
                        
                 <span class="badge rounded-pill bg-dark">Dark</span>
                 <span class="badge rounded-pill bg-dark">Dark</span>
@@ -112,14 +137,15 @@
 
             <div class="form-group">
                 <label  class="form-label mt-4">Firma del Autor</label>
-                <input  class="form-control firma"  placeholder="Firma del autor">
+                <input type="text" class="form-control firma" id="Firma" name="Firma"  placeholder="Firma del autor...">
             </div>
 
             <div class="form-group centered">
-            <button  class="btn btn-success btn-article">Enviar a revisión</button>
+            <input type="submit" name="submit"  class="btn btn-success btn-article" value="Enviar a revisión">
             </div>
             
         </div>
+        </form>
     </div>
     </div>
 </body>
