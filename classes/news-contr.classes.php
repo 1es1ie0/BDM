@@ -11,6 +11,7 @@ class NewsContr extends NewsConn{
     private $text;
     private $fecha;
     private $id;
+    private $imagen;
 
     public function __construct($titulo,$pais,$colonia, $ciudad,$descripcion,$keyword,$firma, $text,$fecha,$id){
         $this->titulo = $titulo;
@@ -46,6 +47,11 @@ class NewsContr extends NewsConn{
             $result = true;
         }
         return $result;
+    }
+    public static function withImage($imagen,$newsid,$id){//todas las instancias comparten el mismo espacio de memoria
+        //$instance= new self();
+       
+        $this->images($this->$imagen,$this->$newsid,$this->$id);
     }
 }
 ?>

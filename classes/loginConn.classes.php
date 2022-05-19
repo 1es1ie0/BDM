@@ -43,7 +43,7 @@ class LoginConn extends Dbh{
             exit();
         }
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
+        $stmt = null;
         return $data;
     }
 

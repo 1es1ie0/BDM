@@ -1,5 +1,5 @@
 <?php include ('./templates/header.php');
-require('.\classes\seccionConn.classes.php');
+include('.\classes\seccionConn.classes.php');
 $ddatabase = new SeccionConn();
 $secciones =$ddatabase->getSection();
 ?>

@@ -1,13 +1,14 @@
 <?php
 
       session_start();
-      require('.\classes\loginConn.classes.php');
+      include('.\classes\loginConn.classes.php');
       $db = new LoginConn();
 if(isset($_SESSION["user_email"])){
 $user= $_SESSION["user_email"];
 
 $data = $db->getUser($user);
 }
+
 ?>
 
 <!DOCTYPE html>
