@@ -1,15 +1,7 @@
 <?php 
 
 include ('./templates/header.php')?>
-<?php
-//include ('C:\xampp\htdocs\PIABDM_INTER\classes\loginConn.classes.php');
-//require ("./classes/dbh.classes.php");
-//require('.\classes\loginConn.classes.php');
 
-//$db = new LoginConn();
-//$user= $_SESSION["user_email"];
-//$data = $db->getUser($user);
-?>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">

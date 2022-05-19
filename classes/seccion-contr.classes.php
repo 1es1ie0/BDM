@@ -2,11 +2,13 @@
 include ('seccionConn.classes.php');
 class SeccionContr extends SeccionConn{
     private $titulo;
+    private $descripcion;
     private $orden;
     private $color;
 
-    public function __construct($titulo,$orden,$color){
+    public function __construct($titulo,$descripcion,$orden,$color){
         $this->titulo = $titulo;
+        $this->descripcion=$descripcion;
         $this->orden = $orden;
         $this->color = $color;
     }
@@ -19,7 +21,7 @@ class SeccionContr extends SeccionConn{
                 exit();//detiene todo el script
             }
            
-            $this->register($this->titulo, $this->orden,$this->color);
+            $this->register($this->titulo,$this->descripcion, $this->orden,$this->color);
     }
 
     

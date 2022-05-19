@@ -26,6 +26,10 @@
                 <label  class="form-label mt-4">Nombre de la seccion</label>
                 <input type="text"   class="form-control"  id="titulo" name="titulo" placeholder="Ingresa el nombre de la seccion...">
             </div>
+            <div class="form-group">
+                <label  class="form-label mt-4">Descripcion de la seccion</label>
+                <input type="text"   class="form-control"  id="descripcion" name="descripcion" placeholder="Ingresa el nombre de la seccion...">
+            </div>
              <div class="form-group">
                 <label  class="form-label mt-4">Orden de la seccion</label>
                 <input type="text"   class="form-control"  id="orden" name="orden" placeholder="Ingresa un orden para la seccion">
