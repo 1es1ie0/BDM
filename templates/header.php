@@ -142,7 +142,10 @@ $data = $db->getUser($user);
     </div>
   </div>
 </nav>
-
+<?php 
+//$db=null;
+//$data =null;
+?>
 
 
 </body>

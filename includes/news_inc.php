@@ -12,17 +12,40 @@ if(isset($_POST["submit"])){
     $text = $_POST["text"];
     $fecha = $_POST["fecha"];
     $id= $_POST["user_id"];
-    $imagen = $_POST["imagen_cantidad[]"];
+    $imagen = $_FILES["imagen_cantidad"];
 
-    $register = new NewsContr($titulo,$pais,$colonia,$ciudad,$descripcion,$keyword,$firma,$text,$fecha,$id);
-   
-        $register->registerNews();
+    if(!empty($_FILES["imagen_cantidad"]))
+
+        $register = new NewsContr($titulo,$pais,$colonia,$ciudad,$descripcion,$keyword,$firma,$text,$fecha,$id);
+        $register = NewsContr::with($titulo,$pais,$colonia, $ciudad,$descripcion,$keyword,$firma, $text,$fecha,$id)->registerNews();
         
     if(isset($_SESSION["NEW_REGISTRADA"])){
-        echo 'si entro';
+        $result=$_SESSION["NEW_REGISTRADA"];
+        echo $result;
+        /*echo 'si entro';
+        echo $imagen;
         $result=$_SESSION["NEW_REGISTRADA"];
         foreach($result as $r){
-        NewsConn::withImage($imagen,$r["NEWS_ID"],$id);
+
+            
+        NewsConn::withImage($imagen,$r["NEWS_ID"],$id);*/
+        $count=count($_FILES['imagen_cantidad']['name']);
+        echo $count;
+        for($i=0; $i<$count; $i++){
+            $fileName = basename($imagen["name"][$i]);
+            $imageType = strtolower( pathinfo($fileName,PATHINFO_EXTENSION));
+            $allowedTypes = array('png','jpg','gif');
+            if(in_array($imageType,$allowedTypes)){
+                $imageName = $imagen["tmp_name"][$i];
+                $base64Image = base64_encode(file_get_contents($imageName));
+                $realImage = 'data:image/'.$imageType.';base64,'.$base64Image;
+            }
+            else{
+                header("location: ../load.php?error=no_valid_extension");
+                exit();
+            }
+
+        }
         }
     }else{
         header("location: ../index.php?error=noEntro");

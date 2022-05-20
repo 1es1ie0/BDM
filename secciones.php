@@ -1,7 +1,6 @@
 <?php include ('./templates/header.php');
-include('.\classes\seccionConn.classes.php');
-$ddatabase = new SeccionConn();
-$secciones =$ddatabase->getSection();
+
+
 ?>
 <head>
     <!-- Required meta tags -->
@@ -30,18 +29,7 @@ $secciones =$ddatabase->getSection();
     <h3 class="text-center mt-5">Secciones</h3>
   </div>
   <br>
- <?php
- foreach($secciones as $s){
- ?>
-  <div class="card text-white  mb-3" style="background: purple;">
-      <div class="card-header"><?php echo $s["SECTION_NAME"]?></div>
-      <div class="card-body">
-      <p class="card-text"><?php echo $s["DESCRIPTION"]?></p>
-  </div>
-</div>
-<?php
- }
-?>
+
 
 <div class="card text-white  mb-3" style="background: blue;">
   <div class="card-header">Seccion 2</div>

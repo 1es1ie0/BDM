@@ -13,7 +13,10 @@ class NewsContr extends NewsConn{
     private $id;
     private $imagen;
 
-    public function __construct($titulo,$pais,$colonia, $ciudad,$descripcion,$keyword,$firma, $text,$fecha,$id){
+    public function __construct(){
+        
+    }
+    public function fillWith($titulo,$pais,$colonia, $ciudad,$descripcion,$keyword,$firma, $text,$fecha,$id){
         $this->titulo = $titulo;
         $this->pais = $pais;
         $this->colonia = $colonia;
@@ -24,6 +27,11 @@ class NewsContr extends NewsConn{
         $this->text= $text;
         $this->fecha= $fecha;
         $this->id= $id;
+    }
+    public static function with( $titulo,$pais,$colonia, $ciudad,$descripcion,$keyword,$firma, $text,$fecha,$id ) {
+        $instance = new self();
+        $instance->fillWith( $titulo,$pais,$colonia, $ciudad,$descripcion,$keyword,$firma, $text,$fecha,$id );
+        return $instance;
     }
 
     public function registerNews(){
@@ -49,9 +57,23 @@ class NewsContr extends NewsConn{
         return $result;
     }
     public static function withImage($imagen,$newsid,$id){//todas las instancias comparten el mismo espacio de memoria
+        $instance = new self();
+        $instance->fillWithImage( $imagen,$newsid,$id );
+        return $instance;
+    }
+    public static function fillWithImage($imagen,$newsid,$id){//todas las instancias comparten el mismo espacio de memoria
         //$instance= new self();
        
-        $this->images($this->$imagen,$this->$newsid,$this->$id);
+        $this->imagen = $imagen;
+        $this->newsid = $newsid;
+        $this->id = $id;
     }
+
+    public function uploadImage(){
+
+        $this->images($this->$imagen,$this->$newsid,$this->$id);
+
+    }
+
 }
 ?>

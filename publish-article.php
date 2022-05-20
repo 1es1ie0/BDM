@@ -88,9 +88,10 @@
                                 <table class="table" id="tablemateriales">
                                     
                                     <tbody>
+                                    <tr><td><input class="form-control" type="file" id="ciudad2"  name="imagen_cantidad[]" required></td><td></td></tr>
                                     </tbody>
                                 </table>
-                            </div>
+            </div>
 
             <div class="form-group">
             <label for="formFile" class="form-label mt-4">Palabras clave</label>

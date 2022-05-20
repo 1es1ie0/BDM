@@ -1,5 +1,5 @@
 <?php
-//include "dbh.classes.php";
+include "dbh.classes.php";
 class SeccionConn extends Dbh{
     protected function register($titulo,$descripcion,$orden,$color){
         $stmt = $this->connect()->prepare('CALL insertSection(?,?,?,?)');

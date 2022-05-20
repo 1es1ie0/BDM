@@ -17,14 +17,14 @@ class NewsConn extends Dbh{
         $stmt = null;
     }
     protected function  images($imagen,$newsid,$id){
-        foreach($image as $i){
+        
             $stmt= $this->connect()->prepare('CALL INSERT_IMAGES(?,?,?)');
             if(!$stmt->execute(array($newsid,$imagen,$id))){
                 $stmt = null;
                 header("location: ../index.php?error=stmtfailed");
                 exit();
             }
-        }
+        
         $stmt = null;
     }
 
