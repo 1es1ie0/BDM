@@ -146,6 +146,8 @@ $("#tablemateriales").on("click", ".DeleteButtonMaterial", function(e) {
             $(this).closest("tr").remove();
             SacarTotalesMateriales();
         });
+
+        
     </script>
 </body>
 

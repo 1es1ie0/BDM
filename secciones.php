@@ -33,12 +33,14 @@ $secciones =$database->getSection();
   <br>
 
 <?php foreach($secciones as $S){?>
-<div id="contenido_sections">
+<div id="contenido_sections" >
+<a href="./editar_seccion.php" style ="text-decoration: none; color:white;">
   <div class="card text-white  mb-3" style="background: <?php echo $S["COLOR"] ?>;">
     <div class="card-header"><?php echo $S["SECTION_NAME"] ?></div>
     <div class="card-body">
       <p class="card-text"><?php echo $S["DESCRIPTION"] ?></p>
     </div>
+    </a>
   </div>
   <?php } ?>
 

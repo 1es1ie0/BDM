@@ -1,5 +1,5 @@
 <?php
-include ('dbh.classes.php');
+include_once ('dbh.classes.php');
 
 class NewsConn extends Dbh{
 
@@ -31,6 +31,22 @@ class NewsConn extends Dbh{
             }
         
         $stmt = null;
+    }
+
+    public function getNews(){
+        $stmt = $this->connect()->prepare('CALL GET_NEWS()');
+        if(!$stmt->execute()){// hace el intercambio con los signos
+            $stmt = null;
+            header("location: ../secciones.php?error=stmtfailed");
+            exit();
+        }
+        $news = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        
+        $_SESSION["NEWS"] = $news;
+        $stmt = null;
+        return $news;
+        
     }
 
 

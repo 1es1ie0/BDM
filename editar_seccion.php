@@ -37,14 +37,10 @@
                 <!--<textarea id="descripcion" name="descripcion" class="form-control text-area-content"  rows="3">Contenido...</textarea>-->
             </div>
           
-            <div class="btn_group_colors" >
-                <button type="button" class="btn btn-primary rounded morado" style="background: purple;"></button>
-                <button type="button" class="btn btn-primary rounded azul" style="background: blue;"></button>
-                <button type="button" class="btn btn-primary rounded verde" style="background: rgb(0, 194, 0);"></button>
-                <button type="button" class="btn btn-primary rounded amarillo" style="background: yellow;"></button>
-                <button type="button" class="btn btn-primary rounded naranja" style="background: rgb(255, 131, 15);"></button>
-                <button type="button" class="btn btn-primary rounded rojo" style="background: red;"></button>
-                <button type="button" class="btn btn-primary rounded rosa" style="background: rgb(255, 118, 221);"></button>
+            <div class="form-group" >
+            <label  class="form-label mt-4">Selecciona el color deseado</label>
+                <input type="color" id="color" name="color"class="btn btn-primary rounded morado" style="background: #222;">
+                
             </div>
 
             

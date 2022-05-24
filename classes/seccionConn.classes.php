@@ -27,6 +27,28 @@ class SeccionConn extends Dbh{
         return $secciones;
         
     }
+    protected function updateSection($sectionID,$nombre, $desc, $colores, $orden){
+        $stmt = $this->connect()->prepare('CALL UPDATE_SECTION(?,?,?,?,?)');
+
+
+        if(!$stmt->execute(array($sectionID,$nombre, $desc, $colores, $orden))){
+            $stmt = null;
+            header("location ../views/Home.php?error=stmtFailed");
+            exit();
+        }
+
+    }
+    protected function deleteSection($secID){
+        $stmt = $this->connect()->prepare('UPDATE NEWS_SECTIONS SET ACTIVE_S = FALSE WHERE SECTION_ID = ?;');
+
+
+        if(!$stmt->execute(array($secID))){
+            $stmt = null;
+            header("location ../secciones.php?error=stmtFailed");
+            exit();
+        }
+
+    }
 }
 
 ?>
