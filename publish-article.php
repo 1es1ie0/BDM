@@ -1,4 +1,8 @@
-<?php include ('./templates/header.php')?>
+<?php include ('./templates/header.php');
+include('./classes/seccionConn.classes.php');
+$database = new SeccionConn();
+$secciones =$database->getSection();
+?>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -104,51 +108,16 @@
             </div>
             <fieldset class="form-group">
                 <legend class="mt-4">Secciones</legend>
+                <?php foreach($secciones as $s){?>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name = ""value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" name = ""value="<?php echo $s["SECTION_ID"] ?>" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">
-                        Nacional
+                        <?php echo $s["SECTION_NAME"] ?>
                         </label>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked="">
-                        <label class="form-check-label" for="flexCheckChecked">
-                        Internacional
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                        Politica
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked="">
-                        <label class="form-check-label" for="flexCheckChecked">
-                        Salud
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                        Negocios
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked="">
-                        <label class="form-check-label" for="flexCheckChecked">
-                        Deportes
-                        </label>
-                        
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                        Espectaculos
-                        </label>
-                    </div>
+                    <?php }
+                    ?>
                     
-                   
             </fieldset>
                 
 

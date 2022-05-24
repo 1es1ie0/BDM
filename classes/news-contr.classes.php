@@ -56,14 +56,13 @@ class NewsContr extends NewsConn{
         }
         return $result;
     }
-    public static function withImage($imagen,$newsid,$id){//todas las instancias comparten el mismo espacio de memoria
+    public  function withImage($imagen,$newsid,$id){//todas las instancias comparten el mismo espacio de memoria
         $instance = new self();
         $instance->fillWithImage( $imagen,$newsid,$id );
         return $instance;
     }
-    public static function fillWithImage($imagen,$newsid,$id){//todas las instancias comparten el mismo espacio de memoria
-        //$instance= new self();
-       
+    public  function fillWithImage($imagen,$newsid,$id){//todas las instancias comparten el mismo espacio de memoria
+        
         $this->imagen = $imagen;
         $this->newsid = $newsid;
         $this->id = $id;
@@ -71,7 +70,7 @@ class NewsContr extends NewsConn{
 
     public function uploadImage(){
 
-        $this->images($this->$imagen,$this->$newsid,$this->$id);
+        $this->images($this->imagen,$this->newsid,$this->id);
 
     }
 

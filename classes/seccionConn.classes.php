@@ -1,5 +1,5 @@
 <?php
-include('dbh.classes.php');
+include_once('dbh.classes.php');
 class SeccionConn extends Dbh{
     protected function register($titulo,$descripcion,$orden,$color){
         $stmt = $this->connect()->prepare('CALL insertSection(?,?,?,?)');
@@ -20,10 +20,11 @@ class SeccionConn extends Dbh{
             exit();
         }
         $secciones = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($secciones);
-        session_start();
+        
+        
         $_SESSION["SECCIONES"] = $secciones;
         $stmt = null;
+        return $secciones;
         
     }
 }

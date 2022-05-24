@@ -1,5 +1,5 @@
 <?php
-include ('dbh.classes.php');
+include_once ('dbh.classes.php');
 
 class LoginConn extends Dbh{
 

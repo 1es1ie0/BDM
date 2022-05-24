@@ -16,8 +16,5 @@ class Dbh{
             die("Connection failed " . $error->getMessage());// DIE termina todo y lanza una excepcion
         }
     }
-    protected function close(){
-        exit();
-    }
 }
 ?>

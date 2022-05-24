@@ -19,10 +19,15 @@ class NewsConn extends Dbh{
     protected function  images($imagen,$newsid,$id){
         
             $stmt= $this->connect()->prepare('CALL INSERT_IMAGES(?,?,?)');
+
             if(!$stmt->execute(array($newsid,$imagen,$id))){
+                
+                echo($stmt->errorInfo());
                 $stmt = null;
-                header("location: ../index.php?error=stmtfailed");
+               // header("location: ../index.php?error=stmtfailed1");
                 exit();
+               
+
             }
         
         $stmt = null;

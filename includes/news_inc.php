@@ -21,7 +21,7 @@ if(isset($_POST["submit"])){
         
     if(isset($_SESSION["NEW_REGISTRADA"])){
         $result=$_SESSION["NEW_REGISTRADA"];
-        echo $result;
+        
         /*echo 'si entro';
         echo $imagen;
         $result=$_SESSION["NEW_REGISTRADA"];
@@ -39,7 +39,7 @@ if(isset($_POST["submit"])){
                 $imageName = $imagen["tmp_name"][$i];
                 $base64Image = base64_encode(file_get_contents($imageName));
                 $realImage = 'data:image/'.$imageType.';base64,'.$base64Image;
-               // $image =NewsContr::withImage($realImage,)->uploadImage()
+               $image =NewsContr::withImage($realImage,$result["NEWS_ID"],$id)->uploadImage();
             }
             else{
                 header("location: ../load.php?error=no_valid_extension");

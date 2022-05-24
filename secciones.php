@@ -1,8 +1,8 @@
 <?php include ('./templates/header.php');
-/*include('./classes/seccionConn.classes.php');
-$ddatabase = new SeccionConn();
-$secciones =$ddatabase->getSection();
-*/
+include('./classes/seccionConn.classes.php');
+$database = new SeccionConn();
+$secciones =$database->getSection();
+
 ?>
 <head>
     <!-- Required meta tags -->
@@ -32,46 +32,18 @@ $secciones =$ddatabase->getSection();
   </div>
   <br>
 
-
+<?php foreach($secciones as $S){?>
 <div id="contenido_sections">
-  <div class="card text-white  mb-3" style="background: blue;">
-    <div class="card-header">Seccion 2</div>
+  <div class="card text-white  mb-3" style="background: <?php echo $S["COLOR"] ?>;">
+    <div class="card-header"><?php echo $S["SECTION_NAME"] ?></div>
     <div class="card-body">
-      <p class="card-text">Descripcion de la seccion</p>
+      <p class="card-text"><?php echo $S["DESCRIPTION"] ?></p>
     </div>
   </div>
-  <div class="card text-white mb-3" style="background: rgb(0, 194, 0);">
-    <div class="card-header">Seccion 3</div>
-    <div class="card-body">
-      <p class="card-text">Descripcion de la seccion</p>
-    </div>
-  </div>
-  <div class="card text-white  mb-3" style="background: yellow;">
-    <div class="card-header">Seccion 4</div>
-    <div class="card-body">
-      <p class="card-text">Descripcion de la seccion</p>
-    </div>
-  </div>
-  <div class="card text-white  mb-3" style="background: rgb(255, 131, 15);">
-    <div class="card-header">Seccion 5</div>
-    <div class="card-body">
-      <p class="card-text">Descripcion de la seccion</p>
-    </div>
-  </div>
-  <div class="card text-white  mb-3" style="background: red;">
-    <div class="card-header">Seccion 6</div>
-    <div class="card-body">
-      <p class="card-text">Descripcion de la seccion</p>
-    </div>
-  </div>
+  <?php } ?>
 
-  <div class="card text-white mb-3" style="background: rgb(255, 118, 221);">
-    <div class="card-header">Seccion 7</div>
-    <div class="card-body">
-      <p class="card-text">Descripcion de la seccion</p>
-    </div>
-  </div>
-</div>
+
+
 
 <center>
   <div class="form-group">
