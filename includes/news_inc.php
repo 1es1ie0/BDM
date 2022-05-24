@@ -30,7 +30,7 @@ if(isset($_POST["submit"])){
             
         NewsConn::withImage($imagen,$r["NEWS_ID"],$id);*/
         $count=count($_FILES['imagen_cantidad']['name']);
-        echo $count;
+        
         for($i=0; $i<$count; $i++){
             $fileName = basename($imagen["name"][$i]);
             $imageType = strtolower( pathinfo($fileName,PATHINFO_EXTENSION));
@@ -39,6 +39,7 @@ if(isset($_POST["submit"])){
                 $imageName = $imagen["tmp_name"][$i];
                 $base64Image = base64_encode(file_get_contents($imageName));
                 $realImage = 'data:image/'.$imageType.';base64,'.$base64Image;
+               // $image =NewsContr::withImage($realImage,)->uploadImage()
             }
             else{
                 header("location: ../load.php?error=no_valid_extension");
@@ -58,5 +59,5 @@ if(isset($_POST["submit"])){
 
 
 
-}
+
 ?>

@@ -18,8 +18,8 @@
   <form class="form-search">
     <div class="search-section">
   
-      <input type="text" class="form-controlsearch" aria-describedby="emailHelp" placeholder="¿Qué estás buscando?">
-      <a class="bi bi-search" style="color: #555; font-size: 1.5rem; margin: auto;" href="./buscador.php"></a>
+      <input type="text"id="input_texto" class="form-controlsearch" aria-describedby="emailHelp" placeholder="¿Qué estás buscando?">
+      <a class="bi bi-search" id="btn_buscar"style="color: #555; font-size: 1.5rem; margin: auto;" href="./buscador.php" onclick="searchNews()"></a>
     </div>
   </form>
 
@@ -75,6 +75,8 @@
 </div>        
 </div>
 </div>
+<script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="js/Ajax/Buscador.js"></script>
 </body>
 
 <?php include ('./templates/footer.php')?>

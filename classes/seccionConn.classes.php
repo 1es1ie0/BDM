@@ -1,5 +1,5 @@
 <?php
-include "dbh.classes.php";
+include('dbh.classes.php');
 class SeccionConn extends Dbh{
     protected function register($titulo,$descripcion,$orden,$color){
         $stmt = $this->connect()->prepare('CALL insertSection(?,?,?,?)');
@@ -12,7 +12,7 @@ class SeccionConn extends Dbh{
         $stmt = null;
         
     }
-    protected function getSection(){
+    public function getSection(){
         $stmt = $this->connect()->prepare('CALL GET_SECTIONS()');
         if(!$stmt->execute()){// hace el intercambio con los signos
             $stmt = null;
@@ -20,6 +20,7 @@ class SeccionConn extends Dbh{
             exit();
         }
         $secciones = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($secciones);
         session_start();
         $_SESSION["SECCIONES"] = $secciones;
         $stmt = null;
