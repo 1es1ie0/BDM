@@ -1,7 +1,5 @@
 <?php include ('./templates/header.php');
-include('./classes/seccionConn.classes.php');
-$database = new SeccionConn();
-$secciones =$database->getSection();
+
 ?>
 <head>
     <!-- Required meta tags -->

@@ -11,7 +11,6 @@ if(isset($_POST["submit"])){
         //$image = $_POST["image"];
         session_start();
         $emailLogged = $_SESSION["user_email"];
-
         $register = new PorfileContr($emailLogged,$email,$pwd,$confirm,$alias,$names,$lastNames,$phone);
         $register->modifyUser();
         header("location: ../index.php?error=none");

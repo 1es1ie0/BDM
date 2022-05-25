@@ -48,6 +48,36 @@ class NewsConn extends Dbh{
         return $news;
         
     }
+    public function getNewsRedaccion(){
+        $stmt = $this->connect()->prepare('CALL GET_NEWS_REDACCION()');
+        if(!$stmt->execute()){// hace el intercambio con los signos
+            $stmt = null;
+            header("location: ../secciones.php?error=stmtfailed");
+            exit();
+        }
+        $news = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        
+        $_SESSION["NEWS_REDACCION"] = $news;
+        $stmt = null;
+        return $news;
+        
+    }
+    public function getNewsTerminadas(){
+        $stmt = $this->connect()->prepare('CALL GET_NEWS_TERMINADA()');
+        if(!$stmt->execute()){// hace el intercambio con los signos
+            $stmt = null;
+            header("location: ../secciones.php?error=stmtfailed");
+            exit();
+        }
+        $news = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        
+        $_SESSION["NEWS_TERMINADA"] = $news;
+        $stmt = null;
+        return $news;
+        
+    }
 
 
     

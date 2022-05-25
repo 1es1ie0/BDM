@@ -27,6 +27,21 @@ class SeccionConn extends Dbh{
         return $secciones;
         
     }
+    public function getSectionID($sectionID){
+        $stmt = $this->connect()->prepare('CALL GET_SECTION_ID(?)');
+        if(!$stmt->execute(array($sectionID))){// hace el intercambio con los signos
+            $stmt = null;
+            header("location: ../secciones.php?error=stmtfailed");
+            exit();
+        }
+        $secciones = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        
+        $_SESSION["SECCIONES_ID"] = $secciones;
+        $stmt = null;
+        return $secciones;
+        
+    }
     protected function updateSection($sectionID,$nombre, $desc, $colores, $orden){
         $stmt = $this->connect()->prepare('CALL UPDATE_SECTION(?,?,?,?,?)');
 
@@ -39,7 +54,7 @@ class SeccionConn extends Dbh{
 
     }
     protected function deleteSection($secID){
-        $stmt = $this->connect()->prepare('UPDATE NEWS_SECTIONS SET ACTIVE_S = FALSE WHERE SECTION_ID = ?;');
+        $stmt = $this->connect()->prepare('UPDATE SECTION SET ACTIVE = 0 WHERE SECTION_ID = ?;');
 
 
         if(!$stmt->execute(array($secID))){

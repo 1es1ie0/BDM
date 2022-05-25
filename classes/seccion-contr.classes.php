@@ -37,4 +37,19 @@ class SeccionContr extends SeccionConn{
     
 }
 
+class SeccionContrId extends SeccionConn{
+    private $sectionID;
+
+    public function __construct($sectionID){
+        $this->sectionID = $sectionID;
+    }
+
+    public function withSection(){
+        $this->getSectionID($this->sectionID);
+    }
+    public function delSection(){
+        $this->deleteSection($this->sectionID);
+    }
+}
+
 ?>

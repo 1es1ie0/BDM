@@ -9,6 +9,10 @@ $user= $_SESSION["user_email"];
 $data = $db->getUser($user);
 }
 
+include('./classes/seccionConn.classes.php');
+$database = new SeccionConn();
+$secciones =$database->getSection();
+
 ?>
 
 <!DOCTYPE html>
@@ -39,13 +43,19 @@ $data = $db->getUser($user);
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" href="./nacional.php">Nacional</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="./internacional.php">Internacional</a>
         </li>
-        <li class="nav-item">
+        <?php foreach($secciones as $S){?>
+        <li class="nav-item" style="background: <?php echo $S["COLOR"] ?>;">
+          <a class="nav-link" href="./salud.php"><?php echo $S["SECTION_NAME"] ?></a>
+        </li>
+        <?php } ?>
+        <!--<li class="nav-item">
           <a class="nav-link" href="./salud.php">Salud</a>
         </li>
         <li class="nav-item">
@@ -59,7 +69,7 @@ $data = $db->getUser($user);
         </li>
         <li class="nav-item">
           <a class="nav-link" href="./espectaculos.php">Espectaculos</a>
-        </li>
+        </li>-->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">Opciones</a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">

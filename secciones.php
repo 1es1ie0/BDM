@@ -1,7 +1,5 @@
 <?php include ('./templates/header.php');
-include('./classes/seccionConn.classes.php');
-$database = new SeccionConn();
-$secciones =$database->getSection();
+
 
 ?>
 <head>
@@ -33,15 +31,21 @@ $secciones =$database->getSection();
   <br>
 
 <?php foreach($secciones as $S){?>
+  <form class="form" action="./includes/secciones_inc.php" method="post" >
 <div id="contenido_sections" >
-<a href="./editar_seccion.php" style ="text-decoration: none; color:white;">
   <div class="card text-white  mb-3" style="background: <?php echo $S["COLOR"] ?>;">
     <div class="card-header"><?php echo $S["SECTION_NAME"] ?></div>
     <div class="card-body">
       <p class="card-text"><?php echo $S["DESCRIPTION"] ?></p>
+
+      <input type="text" name="seccionID" id="seccionID" style="display:none;"value="<?php echo $S["SECTION_ID"]; ?>">
+      <input type="submit" name="viewSec" class="btn btn-outline-info btn-align btn-lg" value="Ver seccion" >
+      <input type="submit" name="deleteSec" class="btn btn-outline-warning btn-align btn-lg" value="Eliminar" >
     </div>
-    </a>
+    
+    
   </div>
+</form>
   <?php } ?>
 
 
@@ -49,8 +53,8 @@ $secciones =$database->getSection();
 
 <center>
   <div class="form-group">
-      <a href="./editar_seccion.php"><input type="submit" class="btn btn-outline-warning btn-align btn-lg" value="Editar Seccion"></a>
-      <a href="./crear_seccion.php"><input type="submit" class="btn btn-outline-info btn-align btn-lg" value="Agregar Seccion"></a>
+     <!-- <a href="./editar_seccion.php"><input type="button" class="btn btn-outline-warning btn-align btn-lg" value="Editar Seccion"></a>-->
+      <a href="./crear_seccion.php"><input type="button" class="btn btn-outline-info btn-align btn-lg" value="Agregar Seccion"></a>
   </div>
 </center>
 
