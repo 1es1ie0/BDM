@@ -48,12 +48,30 @@ if(isset($_POST["submit"])){
 
         }
         }
-    }else{
-        header("location: ../index.php?error=noEntro");
-        exit();
-    }
+    }else if(isset($_POST["ver"])){
+        echo $_POST["news_id"];
     
-        
+        $newsID = $_POST["news_id"];
+        $searchnews = new NewsConnId($newsID);
+        $searchnews->withNews();
+        header("location: ../admin-comentario.php?error=none");
+    }
+    else if(isset($_POST["aprobar"])){
+        echo $_POST["news_id"];
+    
+        $newsID = $_POST["news_id"];
+        $searchnews = new NewsConnId($newsID);
+        $searchnews->Aprobar();
+        header("location: ../admin-notificaciones.php?error=none");
+    }else if(isset($_POST["deleteNew"])){
+        echo $_POST["news_id"];
+    
+        $newsID = $_POST["news_id"];
+        $searchnews = new NewsConnId($newsID);
+        $searchnews->delNews();
+        header("location: ../admin-notificaciones.php?error=none");
+    }
+ 
         
         
 

@@ -36,7 +36,7 @@ class SeccionConn extends Dbh{
         }
         $secciones = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
-        
+        session_start();
         $_SESSION["SECCIONES_ID"] = $secciones;
         $stmt = null;
         return $secciones;

@@ -40,12 +40,14 @@ $newsterminadas =$database->getNewsTerminadas();
             </div>
   <?php foreach($news as $n){?>
     <div class="card border-secondary mb-3" >
+    <form class="form" action="./includes/news_inc.php" method="post" >
                     <div class="card-header">Categoria</div>
+                    <input type="text" style="display:none" id="news_id"name="news_id" value="<?php echo $n["NEWS_ID"]?>">
                       <div class="card-body">
                       <div class="row">
                       <div class="col-sm-4">
                         <div class="position-relative image-hover">
-                          <img src="<?php echo $i["IMAGE_BLOB"] ?>" class="img-fluid img-vista"/>
+                          <img src="<?php echo $n["IMAGE_BLOB"] ?>" class="img-fluid img-vista"/>
                         </div>
                       </div>
                       <div class="col-sm-8">
@@ -53,10 +55,11 @@ $newsterminadas =$database->getNewsTerminadas();
                           <h5 ><?php echo $n["TITLE"]?></h5>
                           <p class="fs-15"> <?php echo $n["SIGN"]?> | <?php echo $n["LAST_UDPATE_DATE"] ?></p>
                         </div>
-                        <button  class="btn btn-outline-info btn-sm ml-1 shadow-none align-right" onclick="location.href='./admin-comentario.php';">Ver</button>
+                        <input type="submit" name="ver" id="ver" class="btn btn-outline-info btn-sm ml-1 shadow-none align-right" value ="Ver">
                       </div>
                     </div>
                       </div>
+  </form>
                   </div>
                 
 <?php }
@@ -70,12 +73,14 @@ $newsterminadas =$database->getNewsTerminadas();
   if(isset($_SESSION["NEWS_TERMINADA"])){
   foreach($newsterminadas as $n){?>
     <div class="card border-secondary mb-3" >
+    <form class="form" action="./includes/news_inc.php" method="post" >
                     <div class="card-header">Categoria</div>
+                    <input type="text" style="display:none" id="news_id"name="news_id" value="<?php echo $n["NEWS_ID"]?>">
                       <div class="card-body">
                       <div class="row">
                       <div class="col-sm-4">
                         <div class="position-relative image-hover">
-                          <img src="<?php echo $i["IMAGE_BLOB"] ?>" class="img-fluid img-vista"/>
+                          <img src="<?php echo $n["IMAGE_BLOB"] ?>" class="img-fluid img-vista"/>
                         </div>
                       </div>
                       <div class="col-sm-8">
@@ -83,10 +88,12 @@ $newsterminadas =$database->getNewsTerminadas();
                           <h5 ><?php echo $n["TITLE"]?></h5>
                           <p class="fs-15"> <?php echo $n["SIGN"]?> | <?php echo $n["LAST_UDPATE_DATE"] ?></p>
                         </div>
-                        <button  class="btn btn-outline-info btn-sm ml-1 shadow-none align-right" onclick="location.href='./admin-comentario.php';">Ver</button>
+                        <input type="submit" name="deleteNew" class="btn btn-outline-warning btn-align btn-lg" value="Eliminar" >
+                        <input type="submit" name="ver" id="ver" class="btn btn-outline-info btn-sm ml-1 shadow-none align-right" value ="Ver">
                       </div>
                     </div>
                       </div>
+  </form>
                   </div>
                 
 <?php }

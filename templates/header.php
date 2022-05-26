@@ -47,9 +47,6 @@ $secciones =$database->getSection();
         <li class="nav-item">
           <a class="nav-link" href="./nacional.php">Nacional</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./internacional.php">Internacional</a>
-        </li>
         <?php foreach($secciones as $S){?>
         <li class="nav-item" style="background: <?php echo $S["COLOR"] ?>;">
           <a class="nav-link" href="./salud.php"><?php echo $S["SECTION_NAME"] ?></a>

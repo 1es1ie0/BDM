@@ -48,6 +48,51 @@ class NewsConn extends Dbh{
         return $news;
         
     }
+    public function getNewsID_EnRedaccion($id){
+        $stmt = $this->connect()->prepare('CALL GET_NEWSREPORTERO_REDACCION(?)');
+        if(!$stmt->execute(array($id))){// hace el intercambio con los signos
+            $stmt = null;
+            header("location: ../secciones.php?error=stmtfailed");
+            exit();
+        }
+        $news = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        
+        $_SESSION["NEWS"] = $news;
+        $stmt = null;
+        return $news;
+        
+    }
+    public function getNewsID_Terminadas($id){
+        $stmt = $this->connect()->prepare('CALL GET_NEWSREPORTERO_TERMINADAS(?)');
+        if(!$stmt->execute(array($id))){// hace el intercambio con los signos
+            $stmt = null;
+            header("location: ../secciones.php?error=stmtfailed");
+            exit();
+        }
+        $news = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        
+        $_SESSION["NEWS"] = $news;
+        $stmt = null;
+        return $news;
+        
+    }
+    public function getNewsID_Aprobadas($id){
+        $stmt = $this->connect()->prepare('CALL GET_NEWSREPORTERO_APROBADA(?)');
+        if(!$stmt->execute(array($id))){// hace el intercambio con los signos
+            $stmt = null;
+            header("location: ../secciones.php?error=stmtfailed");
+            exit();
+        }
+        $news = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        
+        $_SESSION["NEWS"] = $news;
+        $stmt = null;
+        return $news;
+        
+    }
     public function getNewsRedaccion(){
         $stmt = $this->connect()->prepare('CALL GET_NEWS_REDACCION()');
         if(!$stmt->execute()){// hace el intercambio con los signos
@@ -78,9 +123,50 @@ class NewsConn extends Dbh{
         return $news;
         
     }
+    public function getnewsID($newsID){
+        $stmt = $this->connect()->prepare('CALL GET_NEW_ID(?)');
+        if(!$stmt->execute(array($newsID))){// hace el intercambio con los signos
+            $stmt = null;
+            header("location: ../secciones.php?error=stmtfailed");
+            exit();
+        }
+        $n = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        session_start();
+        $_SESSION["n_ID"] = $n;
+        $stmt = null;
+        return $n;
+        
+    }
+    public function ReporteroApruebanewsID($newsID){
+        $stmt = $this->connect()->prepare('CALL ADMIN_APROBO(?)');
+        if(!$stmt->execute(array($newsID))){// hace el intercambio con los signos
+            $stmt = null;
+            header("location: ../admin-notificaciones.php?error=stmtfailed");
+            exit();
+        }
+        $n = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        session_start();
+      
+        $stmt = null;
+        return $n;
+        
+    }
+    protected function deleteNew($newsID){
+        $stmt = $this->connect()->prepare('UPDATE NEWS SET ACTIVE = FALSE WHERE NEWS_ID = ?;');
 
+
+        if(!$stmt->execute(array($newsID))){
+            $stmt = null;
+            header("location ../secciones.php?error=stmtFailed");
+            exit();
+        }
+
+    }
 
     
    
 }
+
 ?>

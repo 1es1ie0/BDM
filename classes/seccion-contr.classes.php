@@ -39,6 +39,7 @@ class SeccionContr extends SeccionConn{
 
 class SeccionContrId extends SeccionConn{
     private $sectionID;
+    
 
     public function __construct($sectionID){
         $this->sectionID = $sectionID;
@@ -49,6 +50,42 @@ class SeccionContrId extends SeccionConn{
     }
     public function delSection(){
         $this->deleteSection($this->sectionID);
+    }
+}
+
+class SeccionEdit extends SeccionConn{
+    private $sectionID;
+    private $titulo;
+    private $descripcion;
+    private $orden;
+    private $color;
+
+    public function __construct($sectionID,$titulo,$descripcion,$orden,$color){
+        $this->sectionID = $sectionID;
+        $this->titulo = $titulo;
+        $this->descripcion=$descripcion;
+        $this->orden = $orden;
+        $this->color = $color;
+    }
+
+    public function editSection(){
+        
+        if( $this->emptyInputs() == false ){
+            // echo 'rip en los inputs';
+            header("location: ../secciones.php?error=emptyInput");// header modifica el httpRequest y reedirecciona al index
+            exit();//detiene todo el script
+        }
+       
+        $this->updateSection($this->sectionID ,$this->titulo,$this->descripcion,$this->color, $this->orden);
+}
+    private function emptyInputs(){
+        $result;
+        if( empty($this->titulo) || empty($this->orden) || empty($this->color)  ){//empty si viene vacio
+            $result = false;
+        }else{
+            $result = true;
+        }
+        return $result;
     }
 }
 

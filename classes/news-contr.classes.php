@@ -75,4 +75,23 @@ class NewsContr extends NewsConn{
     }
 
 }
+
+class NewsConnId extends NewsConn{
+    private $newsID;
+    
+
+    public function __construct($newsID){
+        $this->newsID = $newsID;
+    }
+
+    public function withNews(){
+        $this->getnewsID($this->newsID);
+    }
+    public function Aprobar(){
+        $this->ReporteroApruebanewsID($this->newsID);
+    }
+    public function delNews(){
+        $this->deleteNew($this->newsID);
+    }
+}
 ?>
