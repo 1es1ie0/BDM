@@ -36,6 +36,8 @@ $newsAp=$database->getNewsID_Aprobadas($uid);
   <h5 class="text-center mt-5">En redaccion</h5>
 <?php foreach($news as $n){?>
     <div class="card border-secondary mb-3" >
+    <form class="form" action="./includes/news_inc.php" method="post" >
+    <input type="text" style="display:none" id="news_id"name="news_id" value="<?php echo $n["NEWS_ID"]?>">
                     <div class="card-header">Categoria</div>
                       <div class="card-body">
                       <div class="row">
@@ -49,10 +51,11 @@ $newsAp=$database->getNewsID_Aprobadas($uid);
                           <h5 ><?php echo $n["TITLE"]?></h5>
                           <p class="fs-15"> <?php echo $n["SIGN"]?> | <?php echo $n["LAST_UDPATE_DATE"] ?></p>
                         </div>
-                        <button  class="btn btn-outline-info btn-sm ml-1 shadow-none align-right" onclick="location.href='./noticia.php';">Ver</button>
+                        <input  type="submit" class="btn btn-outline-info btn-sm ml-1 shadow-none align-right" id="edicionReportero" name="edicionReportero"value="Ver">
                       </div>
                     </div>
                       </div>
+</form>
                   </div>
                 
 <?php }

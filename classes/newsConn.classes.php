@@ -16,6 +16,19 @@ class NewsConn extends Dbh{
         $_SESSION["NEW_REGISTRADA"]=$resultado;
         $stmt = null;
     }
+    protected function update($titulo,$pais,$colonia,$ciudad,$descripcion,$keyword,$firma,$text,$fecha,$id,$newsid){
+        
+        $stmt= $this->connect()->prepare('CALL EDIT_NEWS_REPORTERO(?,?,?,?,?,?,?,?,?,?,?)');
+        if(!$stmt->execute(array($text,$titulo,$descripcion,$firma,$fecha,$ciudad,$colonia,$pais,$keyword,$id,$newsid))){
+            $stmt = null;
+            header("location: ../index.php?error=stmtfailed");
+            exit();
+        }
+        $resultado=$stmt->fetch(PDO::FETCH_ASSOC);
+        session_start();
+        $_SESSION["NEW_REGISTRADA"]=$resultado;
+        $stmt = null;
+    }
     protected function  images($imagen,$newsid,$id){
         
             $stmt= $this->connect()->prepare('CALL INSERT_IMAGES(?,?,?)');
@@ -123,6 +136,21 @@ class NewsConn extends Dbh{
         return $news;
         
     }
+    public function getNewsAprobadas(){
+        $stmt = $this->connect()->prepare('CALL GET_NEWS_PUBLICADAS()');
+        if(!$stmt->execute()){// hace el intercambio con los signos
+            $stmt = null;
+            header("location: ../secciones.php?error=stmtfailed");
+            exit();
+        }
+        $news = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        
+        $_SESSION["NEWS_TERMINADA"] = $news;
+        $stmt = null;
+        return $news;
+        
+    }
     public function getnewsID($newsID){
         $stmt = $this->connect()->prepare('CALL GET_NEW_ID(?)');
         if(!$stmt->execute(array($newsID))){// hace el intercambio con los signos
@@ -140,6 +168,21 @@ class NewsConn extends Dbh{
     }
     public function ReporteroApruebanewsID($newsID){
         $stmt = $this->connect()->prepare('CALL ADMIN_APROBO(?)');
+        if(!$stmt->execute(array($newsID))){// hace el intercambio con los signos
+            $stmt = null;
+            header("location: ../admin-notificaciones.php?error=stmtfailed");
+            exit();
+        }
+        $n = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        session_start();
+      
+        $stmt = null;
+        return $n;
+        
+    }
+    public function EditorApruebanewsID($newsID){
+        $stmt = $this->connect()->prepare("UPDATE NEWS SET STATUS ='Aprobada',  LAST_UDPATE_DATE = sysdate() WHERE NEWS_ID = ?;");
         if(!$stmt->execute(array($newsID))){// hace el intercambio con los signos
             $stmt = null;
             header("location: ../admin-notificaciones.php?error=stmtfailed");

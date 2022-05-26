@@ -64,7 +64,7 @@ $news_coment=$_SESSION["n_ID"] ;
                 
                 <div class="border-top py-5">
                     <div class="form-group">
-                        <label  class="form-label mt-4">Descripción de la nota</label>
+                        <label  class="form-label mt-4">Comentarios</label>
                         <textarea class="form-control text-area-description"  rows="3"></textarea>
                     </div>
                     <div class="form-group centered">

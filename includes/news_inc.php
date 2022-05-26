@@ -70,9 +70,48 @@ if(isset($_POST["submit"])){
         $searchnews = new NewsConnId($newsID);
         $searchnews->delNews();
         header("location: ../admin-notificaciones.php?error=none");
+    }else if(isset($_POST["verAprobada"])){
+        echo $_POST["news_id"];
+    
+        $searchnews = new NewsConnId($newsID);
+        $searchnews->withNews();
+        header("location: ../noticia.php?error=none");
     }
- 
+    else if(isset($_POST["aprobarRep"])){
+        echo $_POST["news_id"];
+    
+        $newsID = $_POST["news_id"];
+        $searchnews = new NewsConnId($newsID);
+        $searchnews->AprobarEditor();
+        header("location: ../admin-notificaciones.php?error=none");
+    } else if(isset($_POST["edicionReportero"])){
+        echo $_POST["news_id"];
+    
+        $newsID = $_POST["news_id"];
+        $searchnews = new NewsConnId($newsID);
+        $searchnews->withNews();
+        header("location: ../edit_article.php?error=none");
+    }else if(isset($_POST["EditandoRep"])){
+        echo $_POST["news_id"];
+    
+        $newsID = $_POST["news_id"];
+        $titulo = $_POST["titulo"];
+        $pais = $_POST["pais"];
+        $colonia = $_POST["colonia"];
+        $ciudad = $_POST["ciudad"];
+        $descripcion = $_POST["descripcion"];
+        $keyword = $_POST["keyword"];
+        $firma = $_POST["Firma"];
+        $text = $_POST["text"];
+        $fecha = $_POST["fecha"];
+        $id= $_POST["user_id"];
+        //$imagen = $_FILES["imagen_cantidad"];
+
+        $updated = new NewsContrUpdate($titulo,$pais,$colonia,$ciudad,$descripcion,$keyword,$firma,$text,$fecha,$id);
+        $updated = NewsContrUpdate::with($titulo,$pais,$colonia, $ciudad,$descripcion,$keyword,$firma, $text,$fecha,$id)->updateNews();
         
+        header("location: ../reportero-noticias.php?error=none");
+    }
         
 
 

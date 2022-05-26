@@ -4,6 +4,7 @@ include('./classes/newsConn.classes.php');
 $database = new NewsConn();
 $news =$database->getNewsRedaccion();
 $newsterminadas =$database->getNewsTerminadas();
+$newsaprobadas =$database->getNewsAprobadas();
 ?>
 <head>
     <!-- Required meta tags -->
@@ -88,23 +89,51 @@ $newsterminadas =$database->getNewsTerminadas();
                           <h5 ><?php echo $n["TITLE"]?></h5>
                           <p class="fs-15"> <?php echo $n["SIGN"]?> | <?php echo $n["LAST_UDPATE_DATE"] ?></p>
                         </div>
-                        <input type="submit" name="deleteNew" class="btn btn-outline-warning btn-align btn-lg" value="Eliminar" >
+                        
+                        <input type="submit" name="aprobarRep" id="aprobarRep" class="btn btn-outline-info btn-sm ml-1 shadow-none align-right" value ="Aprobar">
                         <input type="submit" name="ver" id="ver" class="btn btn-outline-info btn-sm ml-1 shadow-none align-right" value ="Ver">
+                        <input type="submit" name="deleteNew" class="btn btn-outline-warning btn-sm ml-1 shadow-none align-right" value="Eliminar" >
                       </div>
                     </div>
                       </div>
   </form>
                   </div>
                 
-<?php }
+<?php }?>
+<h5 class="text-center mt-5">Aprobadas</h5>
+<?php
+foreach($newsaprobadas as $n){?>
+  <div class="card border-secondary mb-3" >
+  <form class="form" action="./includes/news_inc.php" method="post" >
+                  <div class="card-header">Categoria</div>
+                  <input type="text" style="display:none" id="news_id"name="news_id" value="<?php echo $n["NEWS_ID"]?>">
+                    <div class="card-body">
+                    <div class="row">
+                    <div class="col-sm-4">
+                      <div class="position-relative image-hover">
+                        <img src="<?php echo $n["IMAGE_BLOB"] ?>" class="img-fluid img-vista"/>
+                      </div>
+                    </div>
+                    <div class="col-sm-8">
+                      <div class="position-relative image-hover">
+                        <h5 ><?php echo $n["TITLE"]?></h5>
+                        <p class="fs-15"> <?php echo $n["SIGN"]?> | <?php echo $n["LAST_UDPATE_DATE"] ?></p>
+                      </div>
+                      
+                      <input type="submit" name="verAprobada" id="verAprobada" class="btn btn-outline-info btn-sm ml-1 shadow-none align-right" value ="Ver noticia aprobada">
+                    </div>
+                  </div>
+                    </div>
+</form>
+                </div>
+<?php } 
+       
   }else{
     ?><h7 class="text-center mt-5">No hay noticias a mostrar</h7><?php
   }
 
 ?>
 
-
-         
             
     
   </div>

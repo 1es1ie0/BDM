@@ -75,6 +75,65 @@ class NewsContr extends NewsConn{
     }
 
 }
+class NewsContrUpdate extends NewsConn{
+    private $titulo;
+    private $pais;
+    private $colonia;
+    private $ciudad;
+    private $descripcion;
+    private $keyword;
+    private $firma;
+    private $text;
+    private $fecha;
+    private $id;
+    private $newsid;
+   
+
+    public function __construct(){
+        
+    }
+    public function fillWith($titulo,$pais,$colonia, $ciudad,$descripcion,$keyword,$firma, $text,$fecha,$id,$newsid){
+        $this->titulo = $titulo;
+        $this->pais = $pais;
+        $this->colonia = $colonia;
+        $this->ciudad = $ciudad;
+        $this->descripcion = $descripcion;
+        $this->keyword = $keyword;
+        $this->firma = $firma;
+        $this->text= $text;
+        $this->fecha= $fecha;
+        $this->id= $id;
+        $this->newsid=$newsid;
+    }
+    public static function with( $titulo,$pais,$colonia, $ciudad,$descripcion,$keyword,$firma, $text,$fecha,$id,$newsid) {
+        $instance = new self();
+        $instance->fillWith( $titulo,$pais,$colonia, $ciudad,$descripcion,$keyword,$firma, $text,$fecha,$id,$newsid );
+        return $instance;
+    }
+
+    public function updateNews(){
+
+        
+        if( $this->emptyInputs() == false ){
+            // echo 'rip en los inputs';
+            header("location: ../index.php?error=emptyInput");// header modifica el httpRequest y reedirecciona al index
+            exit();//detiene todo el script
+        }
+
+        $this->update($this->titulo, $this->pais,$this->colonia,$this->ciudad,$this->descripcion,$this->keyword,$this->firma,$this->text,$this->fecha,$this->id,$this->newsid=$newsid);
+
+    }
+    private function emptyInputs(){
+        
+        $result;
+        if( empty($this->titulo) || empty($this->pais) || empty($this->colonia) || empty($this->ciudad) || empty($this->descripcion) || empty($this->keyword) || empty($this->firma) ||empty($this->text) ||empty($this->fecha) ||empty($this->id)){//empty si viene vacio
+            $result = false;
+        }else{
+            $result = true;
+        }
+        return $result;
+    }
+}
 
 class NewsConnId extends NewsConn{
     private $newsID;
@@ -89,6 +148,9 @@ class NewsConnId extends NewsConn{
     }
     public function Aprobar(){
         $this->ReporteroApruebanewsID($this->newsID);
+    }
+    public function AprobarEditor(){
+        $this->EditorApruebanewsID($this->newsID);
     }
     public function delNews(){
         $this->deleteNew($this->newsID);
