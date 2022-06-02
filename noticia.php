@@ -1,13 +1,30 @@
 <?php include ('./templates/header.php');
 
-
+include('./classes/newsCommentConn.classes.php');
 include('./classes/newsConn.classes.php');
 $pic=$_SESSION["PIC_IMAGE"];
 $news_coment=$_SESSION["NEWS_DASH"] ;
 $d = new NewsConn();
 $com = new News();
 
+function news_comments($comments){
+  $html = '<table>';
+  foreach( $comments as $comment){
+      if(is_null($comment['PARENT'])){
+          $html .= '<tr class="d-flex flex-column justify-content-start ml-2">';
 
+          $html .= '<td class="d-flex flex-row user-info"><img class="rounded-circle"  src="' . htmlspecialchars($comment['PICTURE']) . '" width="40"><div  class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">' . htmlspecialchars($comment['ALIAS']) . '</span><span class="date text-black-50" style="color: white!important; ">' . htmlspecialchars($comment['FECHA']) . '</span></div></td><td class="mt-2" style="color: white;  padding: 10px;">' . htmlspecialchars($comment['TEXT']) . '</td id="' . htmlspecialchars($comment['ID']) . '">';
+          $html .= '</tr>';
+      }
+      else {
+          $pos = strpos($html,'</td id="'.htmlspecialchars($comment['PARENT']).'">',0);
+          $subcomment = '</tr><tr style ="padding:25px;"class="d-flex flex-column justify-content-start ml-2"><td class="d-flex flex-row user-info"><img class="rounded-circle"  src="' . htmlspecialchars($comment['PICTURE']) . '" width="40"><div  class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">' . htmlspecialchars($comment['ALIAS']) . '</span><span class="date text-black-50" style="color: white!important; ">' . htmlspecialchars($comment['FECHA']) . '</span></div></td><td style="color: white;  padding: 20px;"> - ' . htmlspecialchars($comment['TEXT']) . '</td id="' . htmlspecialchars($comment['ID']) . '"></tr>';
+          $html = substr($html, 0, $pos) . $subcomment . substr($html, $pos);
+      }
+  }
+  $html .= '</table>'; // .= concatena
+  return $html;
+}
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +61,6 @@ $com = new News();
             $n_images=$d->getImgPrincDash($n["NEWS_ID"]);
             ?>
             <div class="news-post-wrapper-sm ">
-              
             <input type="text" style="display:none" id="news_id"name="news_id" value="<?php echo $n["NEWS_ID"]?>">
               <h2 class="text-center">
               <?php echo $n["TITLE"]?>
@@ -87,7 +103,7 @@ $com = new News();
               </p>
              
               <h4 class="mt-5 pt-5 font-weight-600 mb-4 pb-1">Subtitulo (Seccion con video)</h4>
-            </div>
+            
             
             <div class="row">
               <div>
@@ -119,32 +135,24 @@ $com = new News();
             
     <div class="d-flex justify-content-center row">
         <div class="col-md-8">
-          <?php $ID=$_SESSION["ID"]; ?>
             <div class="d-flex flex-column comment-section">
                 <div class="bg-light p-2">
                 <span class="d-block font-weight-bold name">1,200 likes </span> 
                 <button  class="btn btn-outline-primary btn-sm ml-1 shadow-none">Like</button>
                 
-              
+                
                 <br>
                 <br>
-                  <div>
-                  <?php 
-                  $dataCom=$com->newsComments($ID);
-                            if(isset($_SESSION["NEWS_COMMENTS"])){
-                                $comments = $_SESSION["NEWS_COMMENTS"];
-                                echo news_comments($comments);
-                            }
-                        ?>
-                      <div class="d-flex flex-row user-info"><img class="rounded-circle"  src="./assets/images/default-user-img.png" width="40">
-                          <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">Usuario</span><span class="date text-black-50">Fecha de publicación</span></div>
-                      </div>
-                      <div class="mt-2">
-                          <p class="comment-text"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                      </div>
-                  </div>
-                </div>
+                 
 
+                <div class="d-flex flex-row user-info">
+                <?php 
+                  $dataCom=$com->newsComments($_SESSION["ID"]);
+                  if(isset($_SESSION["NEWS_COMMENTS"])){
+                  echo news_comments($dataCom);
+                  }
+                        ?>
+              </div>
            <?php if(isset($_SESSION["user_email"])){?>
                 <div class="bg-light p-2">
               
@@ -163,67 +171,7 @@ $com = new News();
 </div>
 </div>
 
-            <div class="news-post-wrapper-sm mt-5">
-              
-             <br>
-             
-         
-              <h5 >Contenido Relacionado</h5>
-
-            <div class="border-top py-5">
-              
-              <div class="card border-secondary mb-3" >
-                <div class="card-header">Categoria</div>
-                  <div class="card-body">
-                  <div class="row">
-                  <div class="col-sm-4">
-                    <div class="position-relative image-hover">
-                      <img src="./assets/images/news/news-6.jpg" class="img-fluid img-vista"/>
-                      <span onclick="location.href='./noticia.php'" class="thumb-title">Ver nota</span>
-
-                    </div>
-                  </div>
-                  <div class="col-sm-8">
-                    <div class="position-relative image-hover">
-                      <h5 >Ejemplo de titulo de noticia 1</h5>
-                      <p class="fs-15"> Autor | Fecha de publicación</p>
-                    </div>
-                  </div>
-                </div>
-                  </div>
-               </div>
-            </div>
-
-         
-              
-              <div class="card border-secondary mb-3" >
-                <div class="card-header">Categoria</div>
-                  <div class="card-body">
-                  <div class="row">
-                  <div class="col-sm-4">
-                    <div class="position-relative image-hover">
-                      <img src="./assets/images/news/news-7.jpg" class="img-fluid img-vista"/>
-                      <span onclick="location.href='./noticia.php'" class="thumb-title">Ver nota</span>
-
-                    </div>
-                  </div>
-                  <div class="col-sm-8">
-                    <div class="position-relative image-hover">
-                      <h5 >Ejemplo de titulo de noticia 2</h5>
-                      <p class="fs-15"> Autor | Fecha de publicación</p>
-                    </div>
-                  </div>
-                </div>
-                  </div>
-               </div>
-        
-
-              
-
-             
-              
-            </div>
-          </div>
+            
         </div>
       </div>
     </div>

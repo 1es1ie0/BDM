@@ -46,6 +46,17 @@ class LoginConn extends Dbh{
         $stmt = null;
         return $data;
     }
+    public function getUsercomments($emailLogged){
+        $stmt = $this->connect()->prepare('CALL getUser(?);');
+        if(!$stmt->execute(array($emailLogged))){
+            $stmt = null;
+            header("location: ../index.php?error=fail");
+            exit();
+        }
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = null;
+        return $data;
+    }
 
 
 }
