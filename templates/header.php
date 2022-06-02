@@ -75,6 +75,8 @@ $secciones =$database->getSection();
                               if(isset($_SESSION["user_email"])){
                               foreach($data as $i){
                                 $_SESSION["user_id"]=$i["USER_ID"];
+                                $_SESSION["PIC_IMAGE"]=$i["PROFILE_PIC"];
+                                $_SESSION["USER_NAME"]=$i["USER_ALIAS"];
                                 $i["USER_PASS"];
                                
                               if(!empty($i["DESCRIPTION"])){

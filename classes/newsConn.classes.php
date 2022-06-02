@@ -61,6 +61,36 @@ class NewsConn extends Dbh{
         return $news;
         
     }
+    public function getNewsAprobadasDASH(){
+        $stmt = $this->connect()->prepare('CALL NEWS_GET_ALL()');
+        if(!$stmt->execute()){// hace el intercambio con los signos
+            $stmt = null;
+            header("location: ../secciones.php?error=stmtfailed");
+            exit();
+        }
+        $news = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        
+        $_SESSION["N_APROBADAS"] = $news;
+        $stmt = null;
+        return $news;
+        
+    }
+    public function getImgPrincDash($idNews){
+        $stmt = $this->connect()->prepare('CALL GET_NEWS_IMAGES_PUBLICADAS(?)');
+        if(!$stmt->execute(array($idNews))){// hace el intercambio con los signos
+            $stmt = null;
+            header("location: ../secciones.php?error=stmtfailed");
+            exit();
+        }
+        $news = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        
+        //$_SESSION["N_IMAGE"] = $news;
+        $stmt = null;
+        return $news;
+        
+    }
     public function getNewsID_EnRedaccion($id){
         $stmt = $this->connect()->prepare('CALL GET_NEWSREPORTERO_REDACCION(?)');
         if(!$stmt->execute(array($id))){// hace el intercambio con los signos
@@ -102,6 +132,36 @@ class NewsConn extends Dbh{
         
         
         $_SESSION["NEWS"] = $news;
+        $stmt = null;
+        return $news;
+        
+    }
+    public function getNewsID_DASH($id){
+        $stmt = $this->connect()->prepare('CALL VER_NOTA_DASH(?)');
+        if(!$stmt->execute(array($id))){// hace el intercambio con los signos
+            $stmt = null;
+            header("location: ../index.php?error=stmtfailed");
+            exit();
+        }
+        $news = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        session_start();
+        $_SESSION["NEWS_DASH"] = $news;
+        $stmt = null;
+        return $news;
+        
+    }
+    public function getNews_Recientes(){
+        $stmt = $this->connect()->prepare('CALL NEWS_RECIENTES()');
+        if(!$stmt->execute()){// hace el intercambio con los signos
+            $stmt = null;
+            header("location: ../index.php?error=stmtfailed");
+            exit();
+        }
+        $news = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        //session_start();
+        //$_SESSION["NEWS_DASH"] = $news;
         $stmt = null;
         return $news;
         

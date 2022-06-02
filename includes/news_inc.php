@@ -111,6 +111,12 @@ if(isset($_POST["submit"])){
         $updated = NewsContrUpdate::with($titulo,$pais,$colonia, $ciudad,$descripcion,$keyword,$firma, $text,$fecha,$id)->updateNews();
         
         header("location: ../reportero-noticias.php?error=none");
+    }else if(isset($_POST["detalleDash"])){
+        $newsID= $_POST["news_id"];
+    
+        $searchnews = new NewsConnId($newsID);
+        $searchnews->DetalleDash();
+        header("location: ../noticia.php?error=none");
     }
         
 

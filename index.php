@@ -1,4 +1,8 @@
-<?php include ('./templates/header.php')?>
+<?php include ('./templates/header.php');
+include('./classes/newsConn.classes.php');
+$d = new NewsConn();
+$rec = $d->getNews_Recientes();
+?>
 
 <head>
     <!-- Required meta tags -->
@@ -284,47 +288,20 @@
                       <h3 class="section-title">Ultimas noticias</h3>
                     </div>
                   </div>
+                  <?php foreach($rec as $n){ ?>
                   <div class="col-sm-12">
                     <div class="border-bottom pb-3">
-                    <h5 class="font-weight-600 mt-3">Ejemplo noticia</h5>
+                    <h5 class="font-weight-600 mt-3"><?php echo $n["TITLE"]?></h5>
 
                       <p class="text-color m-0 d-flex align-items-center">
-                        <span class="fs-10 mr-1">Fecha de publicacion</span>
+                        <span class="fs-10 mr-1"><?php echo $n["LAST_UDPATE_DATE"]?></span>
                        
                        
                       </p>
                     </div>
                   </div>
-                  <div class="col-sm-12">
-                    <div class="border-bottom pt-4 pb-3">
-                    <h5 class="font-weight-600 mt-3">Ejemplo noticia</h5>
-
-                      <p class="text-color m-0 d-flex align-items-center">
-                      <span class="fs-10 mr-1">Fecha de publicacion</span>
-                        
-                      </p>
-                    </div>
-                  </div>
-                  <div class="col-sm-12">
-                    <div class="border-bottom pt-4 pb-3">
-                    <h5 class="font-weight-600 mt-3">Ejemplo noticia</h5>
-
-                      <p class="text-color m-0 d-flex align-items-center">
-                      <span class="fs-10 mr-1">Fecha de publicacion</span>
-                       
-                      </p>
-                    </div>
-                  </div>
-                  <div class="col-sm-12">
-                    <div class="pt-4">
-                    <h5 class="font-weight-600 mt-3">Ejemplo noticia</h5>
-
-                      <p class="text-color m-0 d-flex align-items-center">
-                      <span class="fs-10 mr-1">Fecha de publicacion</span>
-                    
-                      </p>
-                    </div>
-                  </div>
+                  <?php } ?>
+                  
                 </div>
               </div>
             </div>

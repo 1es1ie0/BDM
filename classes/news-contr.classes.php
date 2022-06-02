@@ -152,6 +152,10 @@ class NewsConnId extends NewsConn{
     public function AprobarEditor(){
         $this->EditorApruebanewsID($this->newsID);
     }
+    public function DetalleDash(){
+        $this->getNewsID_DASH($this->newsID);
+    }
+
     public function delNews(){
         $this->deleteNew($this->newsID);
     }

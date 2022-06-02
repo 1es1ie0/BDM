@@ -1,4 +1,8 @@
-<?php include ('./templates/header.php')?>
+<?php include ('./templates/header.php');
+include('./classes/newsConn.classes.php');
+
+$d = new NewsConn();
+$news_dash =$d->getNewsAprobadasDASH();?>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -26,29 +30,45 @@
   <div class="container-box">
 <div class="container-search-result">
   <div class="card-width">
-
+    <?php foreach($news_dash as $n){
+      $n_images=$d->getImgPrincDash($n["NEWS_ID"]);
+      ?>
     <div class="card border-secondary mb-3" >
+    <form class="form" action="./includes/news_inc.php" method="post" >
                     <div class="card-header">Categoria</div>
+                    <input type="text" style="display:none" id="news_id"name="news_id" value="<?php echo $n["NEWS_ID"]?>">
                       <div class="card-body">
                       <div class="row">
                       <div class="col-sm-4">
+                      <?php foreach($n_images as $index => $i){
+                          if ($index === array_key_first($n_images)){
+                            ?>
                         <div class="position-relative image-hover">
-                          <img src="./assets/images/news/news-6.jpg" class="img-fluid img-vista"/>
-                          <span onclick="location.href='./noticia.php'" class="thumb-title">Ver nota</span>
+                          
+                          
+                          <img src="<?php echo $i["IMAGE_BLOB"] ?>" class="img-fluid img-vista"/>
+                          
+                          <input type="submit" name="detalleDash" id="detalleDash" class="thumb-title"value ="Ver nota">
 
                         </div>
+                        <?php
+                        }else{}
+                       } ?>
                       </div>
                       <div class="col-sm-8">
                         <div class="position-relative image-hover">
-                          <h5 >Ejemplo de titulo de noticia 1</h5>
-                          <p class="fs-15"> Autor | Fecha de publicación</p>
+                          <h5 ><?php echo $n["TITLE"]?></h5>
+                          <p class="fs-15"> <?php echo $n["SIGN"]?> | <?php echo $n["LAST_UDPATE_DATE"]?></p>
+                          
+                          <p class="fs-15"> <?php echo $n["DESCRIPTION"]?> </p>
                         </div>
                       </div>
                     </div>
                       </div>
                   </div>
+                      </form>
                 </div>
-
+<?php } ?>
 
 
           <div class="card border-secondary mb-3" >
