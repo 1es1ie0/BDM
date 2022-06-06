@@ -16,6 +16,19 @@ class NewsConn extends Dbh{
         $_SESSION["NEW_REGISTRADA"]=$resultado;
         $stmt = null;
     }
+    protected function registerTerminada($titulo,$pais,$colonia,$ciudad,$descripcion,$keyword,$firma,$text,$fecha,$id){
+        
+        $stmt= $this->connect()->prepare('CALL insertNewsTerminada(?,?,?,?,?,?,?,?,?,?)');
+        if(!$stmt->execute(array($text,$titulo,$descripcion,$firma,$fecha,$ciudad,$colonia,$pais,$keyword,$id))){
+            $stmt = null;
+            header("location: ../index.php?error=stmtfailed");
+            exit();
+        }
+        $resultado=$stmt->fetch(PDO::FETCH_ASSOC);
+        session_start();
+        $_SESSION["NEW_REGISTRADA"]=$resultado;
+        $stmt = null;
+    }
     protected function update($titulo,$pais,$colonia,$ciudad,$descripcion,$keyword,$firma,$text,$fecha,$id,$newsid){
         
         $stmt= $this->connect()->prepare('CALL EDIT_NEWS_REPORTERO(?,?,?,?,?,?,?,?,?,?,?)');
@@ -267,6 +280,53 @@ class NewsConn extends Dbh{
         }
 
     }
+    protected function SEARCHNew($titulo, $descripcion,$keyword,$fechaInicio,$fechaFinal){
+        $stmt = $this->connect()->prepare('CALL P_BusquedaAvanzada(?,?,?,?,?);');
+
+
+        if(!$stmt->execute(array($titulo, $descripcion,$keyword,$fechaInicio,$fechaFinal))){
+            $stmt = null;
+            header('refresh:0.1;url=../buscador.php?error=stmtFailed');
+            exit();
+        }
+        $n = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        session_start();
+        $_SESSION["SEARCH"] = $n;
+        $stmt = null;
+        return $n;
+    }
+    public function getCommentAdmin($newid){
+        $stmt = $this->connect()->prepare('CALL P_GET_COMMENT_ADMIN(?);');
+
+
+        if(!$stmt->execute(array($newid))){
+            $stmt = null;
+            header('refresh:0.1;url=../buscador.php?error=stmtFailed');
+            exit();
+        }
+        $n = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        
+        $stmt = null;
+        return $n;
+    }
+    public function insertCommentAdmin($newsID,$commentText,$userId){
+        $stmt = $this->connect()->prepare('CALL COMMENT_ADMIN(?,?,?);');
+
+
+        if(!$stmt->execute(array($newsID,$commentText,$userId))){
+            $stmt = null;
+            header('refresh:0.1;url=../admin-notificaciones.php?error=stmtFailed');
+            exit();
+        }
+        $n = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        
+        $stmt = null;
+        return $n;
+    }
+
 
     
    

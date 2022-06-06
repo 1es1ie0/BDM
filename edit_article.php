@@ -1,6 +1,11 @@
 
    <?php include ('./templates/header.php');
-$N=$_SESSION["n_ID"];
+   include('./classes/newsConn.classes.php');
+   $N=$_SESSION["n_ID"];
+   $d = new NewsConn();
+   
+
+
 ?>
 <head>
     <!-- Required meta tags -->
@@ -23,9 +28,35 @@ $N=$_SESSION["n_ID"];
     <div class="container">
     <div class="container-box">
         <?php foreach ($N as $n){?>
+            
         <form action="./includes/news_inc.php"  method="post" enctype="multipart/form-data">
         <div class="row align-items-center justify-content-center "> 
+        
+        <?php $Comment =$d->getCommentAdmin($n["NEWS_ID"]);
+        foreach($Comment as $i){
+                ?>
+                <div class="border-top py-5">
+                    <div class="bg-light p-2">
+                    <center><label  class="form-label mt-4">COMENTARIO ADMINISTRADOR</label></center>
+                    
+                    <input type="text" style="display:none" id="user_id"name="user_id" value="<?php echo $_SESSION["user_id"]?>">
+                        <span class="d-block font-weight-bold name" ><?php echo  $i["ALIAS"]?></span>
+                        
+                        <div class="d-flex flex-row align-items-start">
+                                <img class="rounded-circle" src="<?php echo $i["PICTURE"]?>" width="40">
+                                <label  class="form-label mt-4"><?php echo $i["TEXT"]?></label>
+                                
+                            </div>
+                            
+                            </div>
+                            
+                        </div>
+                </div>
 
+            <?php
+                
+            } ?>
+            <br>
             <div class="form-group">
             <input type="text" style="display:none" id="news_id"name="news_id" value="<?php echo $n["NEWS_ID"]?>">
                 <label  class="form-label mt-4">Titulo</label>
@@ -45,15 +76,7 @@ $N=$_SESSION["n_ID"];
                 <label  class="form-label mt-4">Ciudad<?echo $_SESSION["user_id"]?></label>
                 <input  type="text" class="form-control" id="ciudad" name="ciudad" value="<?php echo $n["CITY"]?>">
             </div>
-            <?php foreach($data as $i){
-                if(strcasecmp($i["DESCRIPTION"],"Admin")==0){?>
-            <div class="form-group">
-                <label  class="form-label mt-4">Comentario de admin </label>
-                <!--<textarea class="form-control text-area-description"  rows="3" placeholder="Deja una retroalimentacion..."></textarea>-->
-            </div>
-            <?php
-                }
-            } ?>
+            
              <div class="form-group">
                 <label  class="form-label mt-4">Fecha en la que ocurrieron los eventos</label>
                 <input type="text" class="form-control" id="fecha" name="fecha"value="<?php echo $n["DATE_OF_EVENTS"]?>">

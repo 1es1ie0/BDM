@@ -63,12 +63,14 @@ $news_coment=$_SESSION["n_ID"] ;
                 <br>
                 
                 <div class="border-top py-5">
+
                     <div class="form-group">
+                      <input  class="form-control text-area-description"  style="display:none;"id="userId" name="userId"value="<?php echo $_SESSION["user_id"]?>">
                         <label  class="form-label mt-4">Comentarios</label>
-                        <textarea class="form-control text-area-description"  rows="3"></textarea>
+                        <input class="form-control text-area-description" id="commentText" name="commentText"  rows="3">
                     </div>
                     <div class="form-group centered">
-                    <button  class="btn btn-warning  btn-article">Regresar el reportero</button>
+                    <input type="submit" name="regresar" id="regresar"  class="btn btn-warning  btn-article" value="Regresar el reportero">
                   
                     <input type="submit" name="aprobar" id="aprobar"  class="btn btn-success btn-article" value="Publicar">
                     </div>

@@ -110,7 +110,8 @@
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name = ""value="<?php echo $s["SECTION_ID"] ?>" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">
-                        <?php echo $s["SECTION_NAME"] ?>
+                            
+                        <?php  echo $s["SECTION_NAME"] ?>
                         </label>
                     </div>
                     <?php }
@@ -125,6 +126,7 @@
             </div>
 
             <div class="form-group centered">
+            <input type="submit" name="Borrador"  class="btn btn-info btn-article" value="Borrador">
             <input type="submit" name="submit"  class="btn btn-success btn-article" value="Enviar a revisión">
             </div>
             

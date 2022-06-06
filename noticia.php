@@ -44,6 +44,9 @@ function news_comments($comments){
    
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./css/styles/style.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./js/Comment.js"></script>
   </head>
 
   <body>
@@ -145,7 +148,7 @@ function news_comments($comments){
                 <br>
                  
 
-                <div class="d-flex flex-row user-info">
+                <div class="d-flex flex-row user-info" >
                 <?php 
                   $dataCom=$com->newsComments($_SESSION["ID"]);
                   if(isset($_SESSION["NEWS_COMMENTS"])){
@@ -153,20 +156,28 @@ function news_comments($comments){
                   }
                         ?>
               </div>
+              <div  class="d-flex flex-row user-info" id="ajaxResponse">
+                </div>
            <?php if(isset($_SESSION["user_email"])){?>
+            <form  class="form"   method="post">
                 <div class="bg-light p-2">
               
+            <input type="text" style="display:none" id="news_id"name="news_id" value="<?php echo $_SESSION["ID"]?>">
+            
+            <input type="text" style="display:none" id="user_id"name="user_id" value="<?php echo $_SESSION["user_id"]?>">
                 <span class="d-block font-weight-bold name"><?php echo  $_SESSION["USER_NAME"]?></span>
                
                     <div class="d-flex flex-row align-items-start">
                       <img class="rounded-circle" src="<?php echo $pic?>" width="40">
-                      <textarea class="form-control ml-1 shadow-none textarea" place="Deja tu comentario"></textarea>
+                      <input class="form-control ml-1 shadow-none textarea" place="Deja tu comentario" id="comment"name="comment" required>
                     </div>
                     <div class="mt-2 text-right">
-                    <button class="btn btn-primary btn-sm shadow-none" type="button">Comentar</button>
-                    <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancelar</button>
+                    <!--<input class="btn btn-primary btn-sm shadow-none" type="button" id="submit" name="submit" value="Comentar2" >-->
+                    <button class="btn btn-primary btn-sm shadow-none" type="button" id="butto2n" >Comentar</button>
+                    <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button" id="cancel" onclick="cancelComment()">Cancelar</button>
                   </div>
                 </div>
+           </form>
                 <?php }?>
 </div>
 </div>
@@ -209,6 +220,7 @@ function news_comments($comments){
     }(document, "script", "twitter-wjs"));
 </script>
 <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+
   </body>
 </html>
 

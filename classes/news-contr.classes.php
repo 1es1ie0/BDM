@@ -46,6 +46,18 @@ class NewsContr extends NewsConn{
         $this->register($this->titulo, $this->pais,$this->colonia,$this->ciudad,$this->descripcion,$this->keyword,$this->firma,$this->text,$this->fecha,$this->id);
 
     }
+    public function registerNewsTerminada(){
+
+        
+        if( $this->emptyInputs() == false ){
+            // echo 'rip en los inputs';
+            header("location: ../index.php?error=emptyInput");// header modifica el httpRequest y reedirecciona al index
+            exit();//detiene todo el script
+        }
+
+        $this->registerTerminada($this->titulo, $this->pais,$this->colonia,$this->ciudad,$this->descripcion,$this->keyword,$this->firma,$this->text,$this->fecha,$this->id);
+
+    }
     private function emptyInputs(){
         
         $result;
@@ -159,5 +171,50 @@ class NewsConnId extends NewsConn{
     public function delNews(){
         $this->deleteNew($this->newsID);
     }
+}
+class NewsSearch extends NewsConn{
+    private $titulo, $descripcion,$keyword,$fechaInicio,$fechaFinal;
+    
+
+    public function __construct($titulo,$descripcion,$keyword,$fechaInicio,$fechaFinal){
+        $this->titulo = $titulo;
+        $this->descripcion = $descripcion;
+        $this->keyword = $keyword;
+        $this->fechaInicio = $fechaInicio;
+        $this->fechaFinal = $fechaFinal;
+    }
+
+    public function FlitrarNews(){
+        
+        $this->SEARCHNew($this->doNull($this->titulo),$this->doNull($this->descripcion),$this->doNull($this->keyword),$this->doNull($this->fechaInicio),$this->doNull($this->fechaFinal));
+    }
+    private function doNull($var){
+        if(empty($var)){
+            $var=null;
+            return $var;
+        }
+        else{
+            return $var;
+        }
+    }
+   
+    
+}
+class NewsCommentAdmin extends NewsConn{
+    private $newsID, $commentText,$userId;
+    
+
+    public function __construct($newsID,$commentText,$userId){
+        $this->newsID = $newsID;
+        $this->commentText = $commentText;
+        $this->userId = $userId;
+    }
+
+    public function commentAdminNews(){
+        
+        $this->insertCommentAdmin($this->newsID,$this->commentText,$this->userId);
+    }
+
+    
 }
 ?>

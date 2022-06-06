@@ -19,18 +19,90 @@ $news_dash =$d->getNewsAprobadasDASH();?>
   </head>
 
 <body>
-  <form class="form-search">
+  <form class="form-search1"  action="./includes/news_inc.php" method="post" >   <!-- Aqui empieza el buscador pocho -->
     <div class="search-section">
-  
-      <input type="text"id="input_texto" class="form-controlsearch" aria-describedby="emailHelp" placeholder="¿Qué estás buscando?">
-      <a class="bi bi-search" id="btn_buscar"style="color: #555; font-size: 1.5rem; margin: auto;" href="./buscador.php" onclick="searchNews()"></a>
+      <input type="text"id="titulo" name="titulo" class="form-controlsearch" aria-describedby="emailHelp" placeholder="Ingrese el titulo de la noticia...">
+      <a id="SEARCH" name="SEARCH" class="bi bi-search" id="btn_buscar"style="color: #555; font-size: 1.5rem; margin: auto;" ></a><input type="submit"   id="SEARCH" name="SEARCH">
     </div>
-  </form>
+    <div class="padre">
+
+      <div class="form-group hijo">
+        <label class="col-form-label mt-4 filter-label" for="inputDefault">Autor:</label>
+        <input type="text" class="form-control"  id="autor" name="autor">
+      </div>
+
+      <div class="form-group hijo">
+        <label class="col-form-label mt-4 filter-label" for="inputDefault">Descripcion:</label>
+        <input type="text" id="descripcion" name="descripcion" class="form-control"  id="inputDefault">
+      </div>
+      <div class="form-group hijo">
+        <label class="col-form-label mt-4 filter-label" for="inputDefault">Palabra clave</label>
+        <input type="text" id="keyword" name="keyword" class="form-control"  id="inputDefault">
+      </div>
+      <div class="form-group hijo">
+        <label class="col-form-label mt-4 filter-label" for="inputDefault">Fecha desde:</label>
+        <input type="text" id="fechaInicio" name="fechaInicio" class="form-control"  id="inputDefault">
+      </div>
+      <div class="form-group hijo">
+        <label class="col-form-label mt-4 filter-label" for="inputDefault">Fecha hasta:</label>
+        <input type="text" id="fechaFinal" name="fechaFinal" class="form-control"  id="inputDefault">
+      </div>
+
+
+    </div>
+
+  </form> <!-- Aqui termina el buscador pocho -->
 
   <div class="container-box">
 <div class="container-search-result">
+  <?php if(isset($_SESSION["SEARCH"])){
+    $new =$_SESSION["SEARCH"];
+    ?>
+    <div class="card-width">
+    <?php foreach($new as $n){
+      $n_images=$d->getImgPrincDash($n["NEWS_ID"]);
+      ?>
+    <div class="card border-secondary mb-3" >
+    <form class="form" action="./includes/news_inc.php" method="post" >
+                    <div class="card-header">Busqueda</div>
+                    <input type="text" style="display:none" id="news_id"name="news_id" value="<?php echo $n["NEWS_ID"]?>">
+                      <div class="card-body">
+                      <div class="row">
+                      <div class="col-sm-4">
+                      <?php foreach($n_images as $index => $i){
+                          if ($index === array_key_first($n_images)){
+                            ?>
+                        <div class="position-relative image-hover">
+                          
+                          
+                          <img src="<?php echo $i["IMAGE_BLOB"] ?>" class="img-fluid img-vista"/>
+                          
+                          <input type="submit" name="detalleDash" id="detalleDash" class="thumb-title"value ="Ver nota">
+
+                        </div>
+                        <?php
+                        }else{}
+                       } ?>
+                      </div>
+                      <div class="col-sm-8">
+                        <div class="position-relative image-hover">
+                          <h5 ><?php echo $n["TITLE"]?></h5>
+                          <p class="fs-15"> <?php echo $n["SIGN"]?> | <?php echo $n["LAST_UDPATE_DATE"]?></p>
+                          
+                          <p class="fs-15"> <?php echo $n["DESCRIPTION"]?> </p>
+                        </div>
+                      </div>
+                    </div>
+                      </div>
+                  </div>
+                      </form>
+                </div>
+          <?php } ?>
+    </div>
+  <?php } ?>
+  </div>
   <div class="card-width">
-    <?php foreach($news_dash as $n){
+    <?php if(!isset($_SESSION["SEARCH"])){ foreach($news_dash as $n){
       $n_images=$d->getImgPrincDash($n["NEWS_ID"]);
       ?>
     <div class="card border-secondary mb-3" >
@@ -68,7 +140,7 @@ $news_dash =$d->getNewsAprobadasDASH();?>
                   </div>
                       </form>
                 </div>
-<?php } ?>
+          <?php }} ?>
 
 
           <div class="card border-secondary mb-3" >
