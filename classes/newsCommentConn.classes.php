@@ -31,7 +31,7 @@ class News extends Dbh {
         
         if(!$stmt->execute(array($comment,$iduser))){
             $stmt = null;
-            header("location: ../noticia.php?error=stmtfailed");
+            header("refresh:0.1;url=../noticia.php?error=stmtfailed1");
             exit();
         }
         $com = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -43,22 +43,22 @@ class News extends Dbh {
         $stmt = $this->connect()->prepare('CALL P_GET_COMMENT_ID(?)');
         if(!$stmt->execute(array($comment))){// hace el intercambio con los signos
             $stmt = null;
-            header("location: ../noticia.php?error=stmtfailed");
+            header("refresh:0.1;url=../noticia.php?error=stmtfailed2");
             exit();
         }
         $com = $stmt->fetchAll(PDO::FETCH_ASSOC);
         session_start();
-        $_SESSION["commen"] = $com;
+        $_SESSION["commen"] = $com[0];
         $stmt = null;
         return $com;
         
     }
-    public function insertCommentLigado($comment,$newid){
+    public function insertCommentLigado($comment,$newsId){
         $stmt = $this->connect()->prepare('CALL P_INSERT_COMMENT_LIGADO(?,?)');
         
-        if(!$stmt->execute(array($comment,$newid))){
+        if(!$stmt->execute(array($comment,$newsId))){
             $stmt = null;
-            header("location: ../noticia.php?error=stmtfailed");
+            header("url=../noticia.php?error=stmtfailed3");
             exit();
         }
     }

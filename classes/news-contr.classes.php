@@ -171,6 +171,25 @@ class NewsConnId extends NewsConn{
     public function delNews(){
         $this->deleteNew($this->newsID);
     }
+    public function delComentario(){
+        $this->deleteComment($this->newsID);
+    }
+    public function newLike(){
+        $this->insertLike($this->newsID);
+    }
+}
+class NewsConnLike extends NewsConn{
+    private $newsID;
+    private $conteo;
+    
+
+    public function __construct($newsID,$conteo){
+        $this->newsID = $newsID;
+        $this->conteo = $conteo;
+    }
+    public function newLike(){
+        $this->insertLike($this->newsID,$this->conteo);
+    }
 }
 class NewsSearch extends NewsConn{
     private $titulo, $descripcion,$keyword,$fechaInicio,$fechaFinal;

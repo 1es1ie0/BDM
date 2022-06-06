@@ -1,13 +1,14 @@
 <?php 
 include ('../classes/newsComment-contr.classes.php');
 include_once('../classes/newsCommentConn.classes.php');
+include_once ('../classes/news-contr.classes.php');
 
 $comm = new News();
-session_start();
+
 
 if(isset($_POST["ajax_sumbit"])){ 
-    $newsId = $_POST["id"];
-    $userid =  $_POST["userid"];
+    $newsId = $_POST["news_id"];
+    $userid =  $_POST["user_id"];
     $comment = $_POST["comment"];
     
     $c = NewsCommentContr::withID($comment,$userid)->insertComments();
@@ -15,12 +16,19 @@ if(isset($_POST["ajax_sumbit"])){
     
     $comentid= $_SESSION["commen"] ;
      //echo json_encode($comentid);
-    $lig =NewsCommentContr::withCOMMENTLIGADO($comentid,$newsId )->getCommentsLigado();
+    $lig =NewsCommentContr::withCOMMENTLIGADO($comentid["COMMENT_ID"] ,$newsId )->getCommentsLigado();
     
     $dataCom=$comm->newsComments($newsId);
-    //echo '<script>console.log('.$dataCom.');</script>';
-    //header('refresh:0.1;url=../index.html?error=none');  header('refresh:0.1;url=../index.html?error=none');
-    echo json_encode($dataCom);
+    echo $comentid["COMMENT_ID"];
+    header('refresh:0.1;url=../noticia.php?error=none'); 
+    
+}
+else if(isset($_POST["deleteComment"])){
+    $idComment = $_POST["idComment"];
+
+    $searchnews = new NewsConnId($idComment);
+    $searchnews->delComentario();
+    header('refresh:0.1;url=../noticia.php?error=none');
 }
 /*elseif(isset($_POST["submit"])){ 
     $newsId = $_POST["id"];

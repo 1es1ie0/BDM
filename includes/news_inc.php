@@ -48,6 +48,7 @@ if(isset($_POST["submit"])){
 
         }
         }
+        header("location: ../reportero-noticias.php?error=none");
     }if(isset($_POST["Borrador"])){
         $titulo = $_POST["titulo"];
         $pais = $_POST["pais"];
@@ -182,6 +183,14 @@ if(isset($_POST["submit"])){
         $searchnews = new NewsSearch($titulo,$descripcion,$keyword,$fechaInicio,$fechaFinal);
         $searchnews->FlitrarNews();
         header("location: ../buscador.php?error=none");
+    }
+    else if(isset($_POST["likes"])){
+        $newsid = $_POST["news_id"];
+        $conteo = $_POST["conteo"];
+    
+        $searchnews = new NewsConnLike($newsid,$conteo);
+        $searchnews->newLike();
+        header('location: ../noticia.php?error=none');
     }
         
 

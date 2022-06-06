@@ -2,6 +2,7 @@
 include('./classes/newsConn.classes.php');
 $d = new NewsConn();
 $rec = $d->getNews_Recientes();
+$populares = $d->getNews_POPULARES();
 ?>
 
 <head>
@@ -146,45 +147,47 @@ $rec = $d->getNews_Recientes();
                 </div>
               </div>
             </div>
+            <?php foreach($populares as $index => $n){ 
+              $n_images=$d->getImgPrincDash($n["NEWS_ID"]);
+              if ($index === array_key_first($populares)){?>
+
             <div class="row">
               <div class="col-lg-6  mb-5 mb-sm-2">
                 <div class="position-relative image-hover">
-                <img src="./assets/images/deportes/noticia2.jpg"class="img-fluid"/>
+                <?php foreach($n_images as $index => $i){
+                          if ($index === array_key_first($n_images)){
+                            ?>
+                <img src="<?php echo $i["IMAGE_BLOB"]?>"class="img-fluid"/>
+                          <?php }}
+                          ?>
                   <span onclick="location.href='./noticia.php'" class="thumb-title">Ver nota</span>
                 </div>
-                <h2 class="font-weight-600 mt-3">CF Monterrey vuelve a México tras Mundial de Clubes </h2>
+                <h2 class="font-weight-600 mt-3"><?php echo $n["TITLE"]?> </h2>
 
                 <p class="fs-15 font-weight-normal">
-                  Lorem Ipsum has been the industry's standard dummy text ever
-                  since the 1500s, when an unknown printer took a galley of type
-                  and
+                <?php echo $n["DESCRIPTION"]?>
                 </p>
               </div>
+              <?php } else{?>
               <div class="col-lg-6  mb-5 mb-sm-2">
                 <div class="row">
                   <div class="col-sm-6  mb-5 mb-sm-2">
                     <div class="position-relative image-hover">
-                    <img src="./assets/images/espectaculos/noticia3.jpg"class="img-fluid"/>
+                    <?php foreach($n_images as $index => $i){
+                          if ($index === array_key_first($n_images)){
+                            ?>
+                    <img src="<?php echo $i["IMAGE_BLOB"]?>"class="img-fluid"/>
+                    <?php }}?>
                       <span onclick="location.href='./noticia.php'" class="thumb-title">Ver nota</span>
                     </div>
-                     <h5 class="font-weight-600 mt-3">Adele pospone indefinidamente su espectáculo en Las Vegas por el coronavirus</h5>
+                     <h5 class="font-weight-600 mt-3"><?php echo $n["TITLE"]?></h5>
 
                     <p class="fs-15 font-weight-normal">
-                      Lorem Ipsum has been the industry's standard dummy text
+                    <?php echo $n["DESCRIPTION"]?>
                     </p>
                   </div>
-                  <div class="col-sm-6  mb-5 mb-sm-2">
-                    <div class="position-relative image-hover">
-                    <img src="./assets/images/salud/noticia5.jpg"class="img-fluid"/>
-                      <span onclick="location.href='./noticia.php'" class="thumb-title">Ver nota</span>
-                    </div>
-                    <h5 class="font-weight-600 mt-3">¿Cuál es el vínculo entre la hipertensión arterial y la diabetes?</h5>
-
-                    <p class="fs-15 font-weight-normal">
-                      Lorem Ipsum has been the industry's standard dummy text
-                    </p>
-                  </div>
-                </div>
+                  
+                  
                 <div class="row mt-3">
                   <div class="col-sm-6  mb-5 mb-sm-2">
                     <div class="position-relative image-hover">
@@ -209,7 +212,9 @@ $rec = $d->getNews_Recientes();
                     </p>
                   </div>
                 </div>
+                <?php } }?>
               </div>
+
             </div>
           </div>
           <div class="popular-news">

@@ -13,18 +13,18 @@ function news_comments($comments){
       if(is_null($comment['PARENT'])){
           $html .= '<tr class="d-flex flex-column justify-content-start ml-2">';
 
-          $html .= '<td class="d-flex flex-row user-info"><img class="rounded-circle"  src="' . htmlspecialchars($comment['PICTURE']) . '" width="40"><div  class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">' . htmlspecialchars($comment['ALIAS']) . '</span><span class="date text-black-50" style="color: white!important; ">' . htmlspecialchars($comment['FECHA']) . '</span></div></td><td class="mt-2" style="color: white;  padding: 10px;">' . htmlspecialchars($comment['TEXT']) ;
+          $html .= '<td class="d-flex flex-row user-info"><input id="idComment" name="idComment" value="'.htmlspecialchars($comment['ID']).'" style="display:none"><img class="rounded-circle"  src="' . htmlspecialchars($comment['PICTURE']) . '" width="40"><div  class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">' . htmlspecialchars($comment['ALIAS']) . '</span><span class="date text-black-50" style="color: white!important; ">' . htmlspecialchars($comment['FECHA']) . '</span></div></td><td class="mt-2" style="color: white;  padding: 10px;">' . htmlspecialchars($comment['TEXT']) ;
           if(strcasecmp($_SESSION["TIPO_USER"], "Reportero")==0 && $_SESSION["user_id"]==$_SESSION["CREATED_BY"]){
-            $html.='<div class="mt-2 text-right"><button class="btn btn-warning btn-sm shadow-none" type="button" id="butto2n" >delete</button></div>';
+            $html.='<div class="mt-2 text-right"><input class="btn btn-warning btn-sm shadow-none" type="submit" id="deleteComment" name="deleteComment" value="delete"></div>';
           }
           $html.=  '</td id="' . htmlspecialchars($comment['ID']) . '">';
           $html .= '</tr>';
       }
       else {
           $pos = strpos($html,'</td id="'.htmlspecialchars($comment['PARENT']).'">',0);
-          $subcomment = '</tr><tr style ="padding:25px;"class="d-flex flex-column justify-content-start ml-2"><td class="d-flex flex-row user-info"><img class="rounded-circle"  src="' . htmlspecialchars($comment['PICTURE']) . '" width="40"><div  class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">' . htmlspecialchars($comment['ALIAS']) . '</span><span class="date text-black-50" style="color: white!important; ">' . htmlspecialchars($comment['FECHA']) . '</span></div></td><td style="color: white;  padding: 20px;"> - ' . htmlspecialchars($comment['TEXT']) ;
+          $subcomment = '</tr><tr style ="padding:25px;"class="d-flex flex-column justify-content-start ml-2"><td class="d-flex flex-row user-info"><input id="idComment" name="idComment" value="'.htmlspecialchars($comment['ID']).'" style="display:none"><img class="rounded-circle"  src="' . htmlspecialchars($comment['PICTURE']) . '" width="40"><div  class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">' . htmlspecialchars($comment['ALIAS']) . '</span><span class="date text-black-50" style="color: white!important; ">' . htmlspecialchars($comment['FECHA']) . '</span></div></td><td style="color: white;  padding: 20px;"> - ' . htmlspecialchars($comment['TEXT']) ;
           if(strcasecmp($_SESSION["TIPO_USER"], "Reportero")==0 && $_SESSION["user_id"]==$_SESSION["CREATED_BY"]){
-            $subcomment.='<div class="mt-2 text-right"><button class="btn btn-warning btn-sm shadow-none" type="button" id="butto2n" >delete</button></div>';
+            $subcomment.='<div class="mt-2 text-right"><input class="btn btn-warning btn-sm shadow-none" type="button" id="deleteComment" name="deleteComment" value="delete"></div>';
           }
           $subcomment .='</td id="' . htmlspecialchars($comment['ID']) . '"></tr>';
           $html = substr($html, 0, $pos) . $subcomment . substr($html, $pos);
@@ -52,9 +52,21 @@ function news_comments($comments){
    
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./css/styles/style.css">
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="./js/Comment.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+  
+  $(document).ready(function(){
+    var increment ='<?php echo $_SESSION["LIKE"]?>';
+    $("#like").click(function(){
+      
+      increment++;
+      alert(increment);
+      $("#conteo").val(increment);
+      
+    });
+  });
+</script>
+    <!--<script src="./js/Comment.js"></script>-->
   </head>
 
   <body>
@@ -62,18 +74,21 @@ function news_comments($comments){
     <div class="container">
     <div class="container-box">
       <div class="row">
+      <?php foreach($news_coment as $n){
+            $_SESSION["ID"]=$n["NEWS_ID"];
+            $_SESSION["LIKE"]=$n["LIKES"];
+            $_SESSION["CREATED_BY"]=$n["CREATED_BY"];
+            $n_images=$d->getImgPrincDash($n["NEWS_ID"]);
+            $get_likes=$d->getLike($n["NEWS_ID"]);
+            ?>
         <div class="col-sm-12">
         
           <div class="news-post-wrapper">
 
          
-          <?php foreach($news_coment as $n){
-            $_SESSION["ID"]=$n["NEWS_ID"];
-            $_SESSION["CREATED_BY"]=$n["CREATED_BY"];
-            $n_images=$d->getImgPrincDash($n["NEWS_ID"]);
-            ?>
+          
             <div class="news-post-wrapper-sm ">
-            <input type="text" style="display:none" id="news_id"name="news_id" value="<?php echo $n["NEWS_ID"]?>">
+            <input type="text"  id="news_id"name="news_id" value="<?php echo $n["NEWS_ID"]?>">
               <h2 class="text-center">
               <?php echo $n["TITLE"]?>
               </h2>
@@ -135,9 +150,7 @@ function news_comments($comments){
                 
               
             </div>
-            <?php
-                } ?>
-
+            
             <br>
 
 
@@ -149,10 +162,21 @@ function news_comments($comments){
         <div class="col-md-8">
             <div class="d-flex flex-column comment-section">
                 <div class="bg-light p-2">
-                <span class="d-block font-weight-bold name">1,200 likes </span> 
-                <button  class="btn btn-outline-primary btn-sm ml-1 shadow-none">Like</button>
-                
-                
+                  <form  action="./includes/news_inc.php"  method="post">
+                    <?php  foreach ($get_likes as $l){
+                      $_SESSION["LIKE"]=$l["LIKES"];
+                      ?>
+                      
+                <span class="d-block font-weight-bold name"><?php echo $_SESSION["LIKE"] ?> likes </span> 
+                <input type="text" style="display:none" id="news_id"name="news_id" value="<?php echo $_SESSION["ID"]?>">
+                <input type="text" style="display:none;" class="btn btn-outline-primary btn-sm ml-1 shadow-none" id="conteo" name="conteo"value= "<?php $_SESSION["LIKE"] ?>">
+                <input type="submit" class="btn btn-outline-primary btn-sm ml-1 shadow-none" id="like" name="likes"value= "Like">
+                <?php
+                } ?>
+              </form>
+              <?php
+                } ?>
+
                 <br>
                 <br>
                  
@@ -168,7 +192,7 @@ function news_comments($comments){
               <div  class="d-flex flex-row user-info" id="ajaxResponse">
                 </div>
            <?php if(isset($_SESSION["user_email"])){?>
-            <form  class="form"   method="post">
+            <form  class="form" action="./includes/newsComment_inc.php"  method="post">
                 <div class="bg-light p-2">
               
             <input type="text" style="display:none" id="news_id"name="news_id" value="<?php echo $_SESSION["ID"]?>">
@@ -182,7 +206,7 @@ function news_comments($comments){
                     </div>
                     <div class="mt-2 text-right">
                     <!--<input class="btn btn-primary btn-sm shadow-none" type="button" id="submit" name="submit" value="Comentar2" >-->
-                    <button class="btn btn-primary btn-sm shadow-none" type="button" id="butto2n" >Comentar</button>
+                    <input class="btn btn-primary btn-sm shadow-none" type="submit" id="butto2n" name="ajax_sumbit" >
                     <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button" id="cancel" onclick="cancelComment()">Cancelar</button>
                   </div>
                 </div>
@@ -229,6 +253,7 @@ function news_comments($comments){
     }(document, "script", "twitter-wjs"));
 </script>
 <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+
 
   </body>
 </html>

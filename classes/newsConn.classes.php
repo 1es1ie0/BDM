@@ -179,6 +179,21 @@ class NewsConn extends Dbh{
         return $news;
         
     }
+    public function getNews_POPULARES(){
+        $stmt = $this->connect()->prepare('CALL NEWS_POPULARES()');
+        if(!$stmt->execute()){// hace el intercambio con los signos
+            $stmt = null;
+            header("location: ../index.php?error=stmtfailed");
+            exit();
+        }
+        $news = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        //session_start();
+        //$_SESSION["NEWS_DASH"] = $news;
+        $stmt = null;
+        return $news;
+        
+    }
     public function getNewsRedaccion(){
         $stmt = $this->connect()->prepare('CALL GET_NEWS_REDACCION()');
         if(!$stmt->execute()){// hace el intercambio con los signos
@@ -280,6 +295,33 @@ class NewsConn extends Dbh{
         }
 
     }
+    protected function insertLike($newsID,$conteo){
+        $stmt = $this->connect()->prepare('UPDATE NEWS SET LIKES = ? WHERE NEWS_ID = ?;');
+
+
+        if(!$stmt->execute(array($conteo,$newsID))){
+            $stmt = null;
+            header("location ../noticia.php?error=stmtFailed");
+            exit();
+        }
+        
+        $stmt=null;
+        
+
+    }
+    public function getLike($newsID){
+        $stmt = $this->connect()->prepare('CALL GET_LIKES(?);');
+        if(!$stmt->execute(array($newsID))){
+            $stmt = null;
+            header("location ../noticia.php?error=stmtFailed");
+            exit();
+        }
+        $n = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        
+        $_SESSION["LIKE"] = $n;
+        return $n;
+    }
     protected function SEARCHNew($titulo, $descripcion,$keyword,$fechaInicio,$fechaFinal){
         $stmt = $this->connect()->prepare('CALL P_BusquedaAvanzada(?,?,?,?,?);');
 
@@ -298,6 +340,21 @@ class NewsConn extends Dbh{
     }
     public function getCommentAdmin($newid){
         $stmt = $this->connect()->prepare('CALL P_GET_COMMENT_ADMIN(?);');
+
+
+        if(!$stmt->execute(array($newid))){
+            $stmt = null;
+            header('refresh:0.1;url=../buscador.php?error=stmtFailed');
+            exit();
+        }
+        $n = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        
+        $stmt = null;
+        return $n;
+    }
+    public function deleteComment($newid){
+        $stmt = $this->connect()->prepare(' CALL P_DELETE_COMMENTS(?);');
 
 
         if(!$stmt->execute(array($newid))){

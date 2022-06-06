@@ -35,18 +35,18 @@ class NewsCommentContr extends News{
     public function getComments(){
         return $this->getCommentID($this->comment);
     }
-    public static function withCOMMENTLIGADO( $comment,$newid) { // mandarlo directamente sin necesidad de una instancia
+    public static function withCOMMENTLIGADO( $comment,$newsId) { // mandarlo directamente sin necesidad de una instancia
         $instance = new self();
-        $instance->fillWithCommentLigado( $comment,$newid );
+        $instance->fillWithCommentLigado( $comment,$newsId );
         return $instance;
     }
 
-    protected function fillWithCommentLigado($comment,$newid) {
+    protected function fillWithCommentLigado($comment,$newsId) {
         $this->comment = $comment;
     }
 
     public function getCommentsLigado(){
-        return $this->insertCommentLigado($this->comment,$this->newid);
+        return $this->insertCommentLigado($this->comment,$this->newsId);
     }
 }
 ?>
