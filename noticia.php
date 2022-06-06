@@ -24,7 +24,7 @@ function news_comments($comments){
           $pos = strpos($html,'</td id="'.htmlspecialchars($comment['PARENT']).'">',0);
           $subcomment = '</tr><tr style ="padding:25px;"class="d-flex flex-column justify-content-start ml-2"><td class="d-flex flex-row user-info"><input id="idComment" name="idComment" value="'.htmlspecialchars($comment['ID']).'" style="display:none"><img class="rounded-circle"  src="' . htmlspecialchars($comment['PICTURE']) . '" width="40"><div  class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">' . htmlspecialchars($comment['ALIAS']) . '</span><span class="date text-black-50" style="color: white!important; ">' . htmlspecialchars($comment['FECHA']) . '</span></div></td><td style="color: white;  padding: 20px;"> - ' . htmlspecialchars($comment['TEXT']) ;
           if(strcasecmp($_SESSION["TIPO_USER"], "Reportero")==0 && $_SESSION["user_id"]==$_SESSION["CREATED_BY"]){
-            $subcomment.='<div class="mt-2 text-right"><input class="btn btn-warning btn-sm shadow-none" type="button" id="deleteComment" name="deleteComment" value="delete"></div>';
+            $subcomment.='<div class="mt-2 text-right"><input class="btn btn-warning btn-sm shadow-none" type="submit" id="deleteComment" name="deleteComment" value="delete"></div>';
           }
           $subcomment .='</td id="' . htmlspecialchars($comment['ID']) . '"></tr>';
           $html = substr($html, 0, $pos) . $subcomment . substr($html, $pos);
@@ -182,12 +182,14 @@ function news_comments($comments){
                  
 
                 <div class="d-flex flex-row user-info" >
+                <form  class="form" action="./includes/newsComment_inc.php"  method="post">
                 <?php 
                   $dataCom=$com->newsComments($_SESSION["ID"]);
                   if(isset($_SESSION["NEWS_COMMENTS"])){
                   echo news_comments($dataCom);
                   }
                         ?>
+                  </form>
               </div>
               <div  class="d-flex flex-row user-info" id="ajaxResponse">
                 </div>

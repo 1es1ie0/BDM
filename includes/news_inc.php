@@ -191,8 +191,14 @@ if(isset($_POST["submit"])){
         $searchnews = new NewsConnLike($newsid,$conteo);
         $searchnews->newLike();
         header('location: ../noticia.php?error=none');
+    }else if(isset($_POST["deleteComment"])){
+        $idComment = $_POST["idComment"];
+    
+        $searchnews = new NewsConnId($idComment);
+        $searchnews->delComentario();
+        header('refresh:0.1;url=../noticia.php?error=none');
     }
-        
+    
 
 
 

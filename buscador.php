@@ -27,11 +27,6 @@ $news_dash =$d->getNewsAprobadasDASH();?>
     <div class="padre">
 
       <div class="form-group hijo">
-        <label class="col-form-label mt-4 filter-label" for="inputDefault">Autor:</label>
-        <input type="text" class="form-control"  id="autor" name="autor">
-      </div>
-
-      <div class="form-group hijo">
         <label class="col-form-label mt-4 filter-label" for="inputDefault">Descripcion:</label>
         <input type="text" id="descripcion" name="descripcion" class="form-control"  id="inputDefault">
       </div>
