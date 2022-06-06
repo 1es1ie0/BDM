@@ -80,7 +80,7 @@ $secciones =$database->getSection();
                                 $i["USER_PASS"];
                                
                               if(!empty($i["DESCRIPTION"])){
-                                $tipo=$_SESSION["TIPO_USER"];
+                                $_SESSION["TIPO_USER"]=$i["DESCRIPTION"];
 
                                 if(strcasecmp($i["DESCRIPTION"],"Admin")==0){
                             ?>

@@ -13,12 +13,20 @@ function news_comments($comments){
       if(is_null($comment['PARENT'])){
           $html .= '<tr class="d-flex flex-column justify-content-start ml-2">';
 
-          $html .= '<td class="d-flex flex-row user-info"><img class="rounded-circle"  src="' . htmlspecialchars($comment['PICTURE']) . '" width="40"><div  class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">' . htmlspecialchars($comment['ALIAS']) . '</span><span class="date text-black-50" style="color: white!important; ">' . htmlspecialchars($comment['FECHA']) . '</span></div></td><td class="mt-2" style="color: white;  padding: 10px;">' . htmlspecialchars($comment['TEXT']) . '</td id="' . htmlspecialchars($comment['ID']) . '">';
+          $html .= '<td class="d-flex flex-row user-info"><img class="rounded-circle"  src="' . htmlspecialchars($comment['PICTURE']) . '" width="40"><div  class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">' . htmlspecialchars($comment['ALIAS']) . '</span><span class="date text-black-50" style="color: white!important; ">' . htmlspecialchars($comment['FECHA']) . '</span></div></td><td class="mt-2" style="color: white;  padding: 10px;">' . htmlspecialchars($comment['TEXT']) ;
+          if(strcasecmp($_SESSION["TIPO_USER"], "Reportero")==0 && $_SESSION["user_id"]==$_SESSION["CREATED_BY"]){
+            $html.='<div class="mt-2 text-right"><button class="btn btn-warning btn-sm shadow-none" type="button" id="butto2n" >delete</button></div>';
+          }
+          $html.=  '</td id="' . htmlspecialchars($comment['ID']) . '">';
           $html .= '</tr>';
       }
       else {
           $pos = strpos($html,'</td id="'.htmlspecialchars($comment['PARENT']).'">',0);
-          $subcomment = '</tr><tr style ="padding:25px;"class="d-flex flex-column justify-content-start ml-2"><td class="d-flex flex-row user-info"><img class="rounded-circle"  src="' . htmlspecialchars($comment['PICTURE']) . '" width="40"><div  class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">' . htmlspecialchars($comment['ALIAS']) . '</span><span class="date text-black-50" style="color: white!important; ">' . htmlspecialchars($comment['FECHA']) . '</span></div></td><td style="color: white;  padding: 20px;"> - ' . htmlspecialchars($comment['TEXT']) . '</td id="' . htmlspecialchars($comment['ID']) . '"></tr>';
+          $subcomment = '</tr><tr style ="padding:25px;"class="d-flex flex-column justify-content-start ml-2"><td class="d-flex flex-row user-info"><img class="rounded-circle"  src="' . htmlspecialchars($comment['PICTURE']) . '" width="40"><div  class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">' . htmlspecialchars($comment['ALIAS']) . '</span><span class="date text-black-50" style="color: white!important; ">' . htmlspecialchars($comment['FECHA']) . '</span></div></td><td style="color: white;  padding: 20px;"> - ' . htmlspecialchars($comment['TEXT']) ;
+          if(strcasecmp($_SESSION["TIPO_USER"], "Reportero")==0 && $_SESSION["user_id"]==$_SESSION["CREATED_BY"]){
+            $subcomment.='<div class="mt-2 text-right"><button class="btn btn-warning btn-sm shadow-none" type="button" id="butto2n" >delete</button></div>';
+          }
+          $subcomment .='</td id="' . htmlspecialchars($comment['ID']) . '"></tr>';
           $html = substr($html, 0, $pos) . $subcomment . substr($html, $pos);
       }
   }
@@ -61,6 +69,7 @@ function news_comments($comments){
          
           <?php foreach($news_coment as $n){
             $_SESSION["ID"]=$n["NEWS_ID"];
+            $_SESSION["CREATED_BY"]=$n["CREATED_BY"];
             $n_images=$d->getImgPrincDash($n["NEWS_ID"]);
             ?>
             <div class="news-post-wrapper-sm ">
