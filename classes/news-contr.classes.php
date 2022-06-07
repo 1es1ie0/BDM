@@ -87,7 +87,7 @@ class NewsContr extends NewsConn{
     }
 
 }
-class NewsContrUpdate extends NewsConn{
+class NewsContrUpdate extends NewsConn{ //UPDATE SARITA
     private $titulo;
     private $pais;
     private $colonia;
@@ -132,7 +132,7 @@ class NewsContrUpdate extends NewsConn{
             exit();//detiene todo el script
         }
 
-        $this->update($this->titulo, $this->pais,$this->colonia,$this->ciudad,$this->descripcion,$this->keyword,$this->firma,$this->text,$this->fecha,$this->id,$this->newsid=$newsid);
+        $this->update($this->titulo, $this->pais,$this->colonia,$this->ciudad,$this->descripcion,$this->keyword,$this->firma,$this->text,$this->fecha,$this->id,$this->newsid);
 
     }
     private function emptyInputs(){

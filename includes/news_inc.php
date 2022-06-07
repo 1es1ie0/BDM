@@ -15,11 +15,11 @@ if(isset($_POST["submit"])){
     $imagen = $_FILES["imagen_cantidad"];
     $category = $_POST["category"];
 
-    if(!empty($_FILES["imagen_cantidad"]))
-
+    if(!empty($_FILES["imagen_cantidad"])){
         $register = new NewsContr($titulo,$pais,$colonia,$ciudad,$descripcion,$keyword,$firma,$text,$fecha,$id);
         $register = NewsContr::with($titulo,$pais,$colonia, $ciudad,$descripcion,$keyword,$firma, $text,$fecha,$id)->registerNewsTerminada();
-        
+    }
+
     if(isset($_SESSION["NEW_REGISTRADA"])){
         $result=$_SESSION["NEW_REGISTRADA"];
         // OLA LELI TQM
@@ -142,7 +142,7 @@ if(isset($_POST["submit"])){
         $searchnews = new NewsConnId($newsID);
         $searchnews->withNews();
         header("location: ../edit_article.php?error=none");
-    }else if(isset($_POST["EditandoRep"])){
+    }else if(isset($_POST["submit_edit"])){ // EDITAR MOVERLE SARITA
         echo $_POST["news_id"];
     
         $newsID = $_POST["news_id"];
@@ -158,8 +158,8 @@ if(isset($_POST["submit"])){
         $id= $_POST["user_id"];
         //$imagen = $_FILES["imagen_cantidad"];
 
-        $updated = new NewsContrUpdate($titulo,$pais,$colonia,$ciudad,$descripcion,$keyword,$firma,$text,$fecha,$id);
-        $updated = NewsContrUpdate::with($titulo,$pais,$colonia, $ciudad,$descripcion,$keyword,$firma, $text,$fecha,$id)->updateNews();
+        $updated = new NewsContrUpdate($titulo,$pais,$colonia,$ciudad,$descripcion,$keyword,$firma,$text,$fecha,$id,$newsID );
+        $updated = NewsContrUpdate::with($titulo,$pais,$colonia, $ciudad,$descripcion,$keyword,$firma, $text,$fecha,$id,$newsID)->updateNews();
         
         header("location: ../reportero-noticias.php?error=none");
     }else if(isset($_POST["detalleDash"])){
