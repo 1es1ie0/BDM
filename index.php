@@ -90,6 +90,7 @@ $populares = $d->getNews_POPULARES();
                 </div>
               </div>
             </div>
+            
             <div class="row">
               <div class="col-lg-3 col-sm-6 grid-margin mb-5 mb-sm-2">
                 <div class="position-relative image-hover">
@@ -139,57 +140,63 @@ $populares = $d->getNews_POPULARES();
               </div>
             </div>
           </div>
-          <div class="editors-news">
+
+          <div class="world-news">
             <div class="row">
-              <div class="col-lg-3">
-                <div class="d-flex position-relative float-left">
-                  <h3 class="section-title">Noticias Populares</h3>
+              <div class="col-lg-9">
+                <div class="d-flex position-relative  float-left">
+                  <h3 class="section-title">Noticias populares</h3>
                 </div>
               </div>
             </div>
-            <?php foreach($populares as $index => $n){ 
-              $n_images=$d->getImgPrincDash($n["NEWS_ID"]);
-              if ($index === array_key_first($populares)){?>
-
-            <div class="row">
-              <div class="col-lg-6  mb-5 mb-sm-2">
-                <div class="position-relative image-hover">
-                <?php foreach($n_images as $index => $i){
-                          if ($index === array_key_first($n_images)){
-                            ?>
-                <img src="<?php echo $i["IMAGE_BLOB"]?>"class="img-fluid"/>
-                          <?php }}
-                          ?>
-                  <span onclick="location.href='./noticia.php'" class="thumb-title">Ver nota</span>
-                </div>
-                <h2 class="font-weight-600 mt-3"><?php echo $n["TITLE"]?> </h2>
-
-                <p class="fs-15 font-weight-normal">
-                <?php echo $n["DESCRIPTION"]?>
-                </p>
-              </div>
-              <?php } else{?>
-              <div class="col-lg-6  mb-5 mb-sm-2">
+           
                 <div class="row">
-                  <div class="col-sm-6  mb-5 mb-sm-2">
-                    <div class="position-relative image-hover">
-                    <?php foreach($n_images as $index => $i){
-                          if ($index === array_key_first($n_images)){
-                            ?>
-                    <img src="<?php echo $i["IMAGE_BLOB"]?>"class="img-fluid"/>
-                    <?php }}?>
-                      <span onclick="location.href='./noticia.php'" class="thumb-title">Ver nota</span>
-                    </div>
-                     <h5 class="font-weight-600 mt-3"><?php echo $n["TITLE"]?></h5>
+
+                <?php foreach($populares as $index => $n){ 
+                  $n_images=$d->getImgPrincDash($n["NEWS_ID"]);
+                  if ($index === array_key_first($populares)){?>
+
+            <div class="row  mt-3">
+                <div class="col-lg-3 col-sm-6 grid-margin mb-5 mb-sm-2">
+                      <div class="position-relative image-hover">
+                      <?php foreach($n_images as $index => $i){
+                                if ($index === array_key_first($n_images)){
+                                  ?>
+                      <img src="<?php echo $i["IMAGE_BLOB"]?>"class="img-fluid" />
+                                <?php }}
+                                ?>
+                        <span onclick="location.href='./noticia.php'" class="thumb-title">Ver nota</span>
+                </div>
+                    <h2 class="font-weight-600 mt-3"><?php echo $n["TITLE"]?> </h2>
 
                     <p class="fs-15 font-weight-normal">
                     <?php echo $n["DESCRIPTION"]?>
                     </p>
                   </div>
+                  <?php } else{?>
+
+
+                <div class="col-lg-3 col-sm-6 grid-margin mb-5 mb-sm-2">
+                        <div class="position-relative image-hover">
+                        <?php foreach($n_images as $index => $i){
+                              if ($index === array_key_first($n_images)){
+                                ?>
+                        <img src="<?php echo $i["IMAGE_BLOB"]?>"class="img-fluid"/>
+                            <?php }}
+                            ?>
+                          <span onclick="location.href='./noticia.php'" class="thumb-title">Ver nota</span>
+                        </div>
+                        <h5 class="font-weight-600 mt-3"><?php echo $n["TITLE"]?></h5>
+
+                        <p class="fs-15 font-weight-normal">
+                        <?php echo $n["DESCRIPTION"]?>
+                        </p>
+                      </div>
+
                   
                   
-                <div class="row mt-3">
-                  <div class="col-sm-6  mb-5 mb-sm-2">
+         
+                <div class="col-lg-3 col-sm-6 grid-margin mb-5 mb-sm-2">
                     <div class="position-relative image-hover">
                     <img src="./assets/images/salud/noticia3.jpg"class="img-fluid"/>
                       <span onclick="location.href='./noticia.php'" class="thumb-title">Ver nota</span>
@@ -200,7 +207,8 @@ $populares = $d->getNews_POPULARES();
                       Lorem Ipsum has been the industry's standard dummy text
                     </p>
                   </div>
-                  <div class="col-sm-6">
+
+                  <div class="col-lg-3 col-sm-6 grid-margin mb-5 mb-sm-2">
                     <div class="position-relative image-hover">
                     <img src="./assets/images/espectaculos/noticia4.jpg"class="img-fluid"/>
                       <span onclick="location.href='./noticia.php'" class="thumb-title">Ver nota</span>
@@ -214,9 +222,10 @@ $populares = $d->getNews_POPULARES();
                 </div>
                 <?php } }?>
               </div>
-
+              </div>
             </div>
           </div>
+            </div>
           <div class="popular-news">
             <div class="row">
               <div class="col-lg-3">
@@ -282,10 +291,8 @@ $populares = $d->getNews_POPULARES();
               </div>
               <div class="col-lg-3">
                 <div class="position-relative mb-3">
-                  <img   src="assets/images/logofondo.jpg"class="img-fluid" />
-                  <div class="video-thumb text-muted">
-                    <span><i class="mdi mdi-menu-right"></i></span>Anuncio
-                  </div>
+                 
+                  
                 </div>
                 <div class="row">
                   <div class="col-sm-12">

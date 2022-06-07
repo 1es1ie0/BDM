@@ -630,6 +630,10 @@
    max-width: 100%;
    height: auto;
  }
+ .img-fluid {
+  max-width: 100%;
+  height: auto;
+}
  
  .img-thumbnail {
    padding: 0.25rem;
@@ -3135,6 +3139,8 @@
    background-color: #555;
    border-color: #555;
  }
+
+
  
  .btn-secondary:hover {
    color: #fff;

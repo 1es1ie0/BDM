@@ -20,10 +20,13 @@ $news_dash =$d->getNewsAprobadasDASH();?>
 
 <body>
   <form class="form-search1"  action="./includes/news_inc.php" method="post" >   <!-- Aqui empieza el buscador pocho -->
-    <div class="search-section">
-      <input type="text"id="titulo" name="titulo" class="form-controlsearch" aria-describedby="emailHelp" placeholder="Ingrese el titulo de la noticia...">
-      <a id="SEARCH" name="SEARCH" class="bi bi-search" id="btn_buscar"style="color: #555; font-size: 1.5rem; margin: auto;" ></a><input type="submit"   id="SEARCH" name="SEARCH">
+    <div class="search-section ">
+    <div class="padre">
+        <input type="text"id="titulo" name="titulo" class="form-control me-sm-2  hijo" aria-describedby="emailHelp" placeholder="Ingrese el titulo de la noticia...">
+        <button  id="SEARCH" name="SEARCH" id="btn_buscar" class="btn btn-primary  hijo" type="submit">Search</button>
+        </div>
     </div>
+
     <div class="padre">
 
       <div class="form-group hijo">
@@ -164,6 +167,11 @@ $news_dash =$d->getNewsAprobadasDASH();?>
 </div>
 <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="js/Ajax/Buscador.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+<script src="../assets/js/demo.js"></script>
 </body>
 
 <?php include ('./templates/footer.php')?>

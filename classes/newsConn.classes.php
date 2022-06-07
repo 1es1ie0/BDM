@@ -384,7 +384,18 @@ class NewsConn extends Dbh{
         return $n;
     }
 
+    public function insertSection($newsID, $sectionID){
+        $stmt = $this->connect()->prepare('INSERT INTO NEWS_SECTION (NEWS_ID, SECTION_ID) VALUES(?,?);');
 
+
+        if(!$stmt->execute(array($newsID,$sectionID))){
+            $stmt = null;
+            header('refresh:0.1;url=../index.php?error=stmtFailed');
+            exit();
+        }
+        $stmt = null;
+
+    }
     
    
 }

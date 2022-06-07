@@ -6,7 +6,7 @@ class Dbh{
 
             $server="localhost";
             $username="root";
-            $password="lero2001";
+            $password="Venegas";
             $database="pia_news_bdm";
 
             $conn = new PDO("mysql:host=$server;dbname=$database;",$username,$password);// generamos una instancia de PDO (Php DataBase Object)

@@ -1,6 +1,6 @@
 <?php
 include ('../classes/news-contr.classes.php');
-
+include_once('../classes/newsConn.classes.php');
 if(isset($_POST["submit"])){
     $titulo = $_POST["titulo"];
     $pais = $_POST["pais"];
@@ -13,6 +13,7 @@ if(isset($_POST["submit"])){
     $fecha = $_POST["fecha"];
     $id= $_POST["user_id"];
     $imagen = $_FILES["imagen_cantidad"];
+    $category = $_POST["category"];
 
     if(!empty($_FILES["imagen_cantidad"]))
 
@@ -21,14 +22,20 @@ if(isset($_POST["submit"])){
         
     if(isset($_SESSION["NEW_REGISTRADA"])){
         $result=$_SESSION["NEW_REGISTRADA"];
-        
+        // OLA LELI TQM
         /*echo 'si entro';
         echo $imagen;
         $result=$_SESSION["NEW_REGISTRADA"];
         foreach($result as $r){
+        NewsConn::withImage($imagen,$r["NEWS_ID"],$id);*/        
+        foreach($category as $cat){
+            $db = new NewsConn();
+            $query = $db->insertSection($result["NEWS_ID"], $cat);
+        }
+       
 
-            
-        NewsConn::withImage($imagen,$r["NEWS_ID"],$id);*/
+       
+
         $count=count($_FILES['imagen_cantidad']['name']);
         
         for($i=0; $i<$count; $i++){
@@ -48,7 +55,7 @@ if(isset($_POST["submit"])){
 
         }
         }
-        header("location: ../reportero-noticias.php?error=none");
+       header("location: ../reportero-noticias.php?error=none");
     }if(isset($_POST["Borrador"])){
         $titulo = $_POST["titulo"];
         $pais = $_POST["pais"];
@@ -56,10 +63,6 @@ if(isset($_POST["submit"])){
         $ciudad = $_POST["ciudad"];
         $descripcion = $_POST["descripcion"];
         $keyword = $_POST["keyword"];
-        $firma = $_POST["Firma"];
-        $text = $_POST["text"];
-        $fecha = $_POST["fecha"];
-        $id= $_POST["user_id"];
         $imagen = $_FILES["imagen_cantidad"];
     
         if(!empty($_FILES["imagen_cantidad"]))

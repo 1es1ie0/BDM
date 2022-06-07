@@ -144,7 +144,7 @@
                     ?>
                     
             </fieldset>
-                
+            <?php }?>
 
             <div class="form-group">
                 <label  class="form-label mt-4">Firma del Autor</label>
@@ -152,12 +152,12 @@
             </div>
 
             <div class="form-group centered">
-            <input type="submit" name="EditandoRep"  class="btn btn-success btn-article" value="Enviar a revisión">
+            <input type="submit" name="submit_edit" id="submit_edit"  class="btn btn-success btn-article editbtn" value="Enviar a revisión">
             </div>
             
         </div>
         </form>
-        <?php }?>
+       
     </div>
     </div>
     <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
@@ -175,6 +175,13 @@ $("#tablemateriales").on("click", ".DeleteButtonMaterial", function(e) {
 
         
     </script>
+
+  
+
+    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+<script src="../assets/js/demo.js"></script>
 </body>
 
 
