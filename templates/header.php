@@ -48,9 +48,12 @@ $secciones =$database->getSection();
           <a class="nav-link" href="./nacional.php">Nacional</a>
         </li>
         <?php foreach($secciones as $S){?>
-        <li class="nav-item" style="background: <?php echo $S["COLOR"] ?>;">
-          <a class="nav-link" href="./salud.php"><?php echo $S["SECTION_NAME"] ?></a>
+          <form action="./includes/news_inc.php" method="post">
+            <input type="text" style="display:none" id="section_id"name="section_id" value="<?php echo $S["SECTION_ID"]?>">
+        <li class="nav-item" style="background: <?php echo $S["COLOR"] ?>; ">
+          <input type="submit"style="background: <?php echo $S["COLOR"] ?>; border:none;" class="nav-link" name="secciones" value="<?php echo $S["SECTION_NAME"] ?>">
         </li>
+        </form>
         <?php } ?>
         <!--<li class="nav-item">
           <a class="nav-link" href="./salud.php">Salud</a>

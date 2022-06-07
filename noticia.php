@@ -88,7 +88,7 @@ function news_comments($comments){
          
           
             <div class="news-post-wrapper-sm ">
-            <input type="text"  id="news_id"name="news_id" value="<?php echo $n["NEWS_ID"]?>">
+            <input type="text" style="display:none;" id="news_id"name="news_id" value="<?php echo $n["NEWS_ID"]?>">
               <h2 class="text-center">
               <?php echo $n["TITLE"]?>
               </h2>

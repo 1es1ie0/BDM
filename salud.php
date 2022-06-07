@@ -1,4 +1,10 @@
-<?php include ('./templates/header.php')?>
+<?php include ('./templates/header.php');
+include('./classes/newsConn.classes.php');
+
+$d = new NewsConn();
+$n_dash=$_SESSION["NEWS_SECTION"];
+$populares = $d->getNews_POPULARES();
+?>
 <html lang="zxx">
   <head>
     <!-- Required meta tags -->
@@ -27,156 +33,74 @@
           <div class="col-sm-12">
             <div class="text-center">
                 <br>
-              <h1 class="text-center mt-5">Salud</h1>
+              <h1 class="text-center mt-5">Noticias</h1>
             </div>
-            <h5 class="text-muted font-weight-medium mb-3">Noticias Salud</h5>
           </div>
         </div>
-        <div class="row">
-          <div class="col-lg-6  mb-5 mb-sm-2">
-            <div class="position-relative image-hover">
-              <img src="./assets/images/salud/noticia1.jpg" class="img-fluid" />
-              <span onclick="location.href='./noticia.php'" class="thumb-title">Ver nota</span>
 
-            </div>
-            <h3 class="font-weight-600 mt-3">OPS realiza curso Secuenciación Genómicas busca capacitar personal de salud de Rep. Dom. y Guatemala</h3>
-            <p class="fs-15 font-weight-normal">
-              Lorem Ipsum has been the industry's standard dummy text ever since
-              the 1500s, when an unknown printer took a galley of type and</p>
+        <?php foreach($n_dash as $n){
+          $n_images=$d->getImgPrincDash($n["NEWS_ID"]);?>
+
+              <form  action="./includes/news_inc.php" method="post"  >
+              <div class="row" >
+                <div class="col-lg-6  mb-5 mb-sm-2" >
+                  <input type="text" style="display:none" id="news_id"name="news_id" value="<?php echo $n["NEWS_ID"]?>">
+                  <div class="position-relative image-hover">
+                  <?php foreach($n_images as $index => $i){
+                                if ($index === array_key_first($n_images)){
+                                  ?>
+                    <img src="<?php echo $i["IMAGE_BLOB"] ?>"  class="img-fluid" />
+                    <input type="submit" name="detalleDash" id="detalleDash" class="thumb-title"value ="Ver nota">
+                    <?php
+                              }
+                            } ?>
+                      
+                </div>
+                <h3 class="font-weight-600 mt-3"><?php echo $n["TITLE"]?></h3>
+                <p class="fs-15"> <?php echo $n["SIGN"]?> | <?php echo $n["LAST_UDPATE_DATE"]?></p>
+                <p class="fs-15 font-weight-normal"><?php echo $n["DESCRIPTION"]?></p>
+              
+            
           </div>
+         
           
-          <div class="col-lg-6  mb-5 mb-sm-2">
-            <div class="row">
-              <div class="col-sm-6  mb-5 mb-sm-2">
-                <div class="position-relative image-hover">
-                  <img src="./assets/images/salud/noticia2.jpg"class="img-fluid"/>
-                  <span onclick="location.href='./noticia.php'" class="thumb-title">Ver nota</span>
-
-                </div>
-                <h5 class="font-weight-600 mt-3">La OMS aseguró que la fase aguda de la pandemia podría terminar a mediados de año si el 70% de la población es vacunada </h5>
-                <p class="fs-15 font-weight-normal">
-                  Lorem Ipsum has been the industry's standard dummy text
-                </p>
-              </div>
-              <div class="col-sm-6  mb-5 mb-sm-2">
-                <div class="position-relative image-hover">
-                  <img src="./assets/images/salud/noticia3.jpg"class="img-fluid"/>
-                  <span onclick="location.href='./noticia.php'" class="thumb-title">Ver nota</span>
-
-                </div>
-                <h5 class="font-weight-600 mt-3">Entra en vigor la nueva Clasificación Internacional de Enfermedades (CIE-11) de la OMS</h5>
-                <p class="fs-15 font-weight-normal">
-                  Lorem Ipsum has been the industry's standard dummy text
-                </p>
-              </div>
-            </div>
-            <div class="row mt-3">
-              <div class="col-sm-6  mb-5 mb-sm-2">
-                <div class="position-relative image-hover">
-                  <img src="./assets/images/salud/noticia4.jpg"class="img-fluid"/>
-                  <span onclick="location.href='./noticia.php'" class="thumb-title">Ver nota</span>
-
-                </div>
-                <h5 class="font-weight-600 mt-3">El Grupo de Expertos en Asesoramiento Estratégico sobre Inmunización de la OMS actualiza recomendaciones sobre dosis de refuerzo y vacunación COVID-19 para niños </h5>
-                <p class="fs-15 font-weight-normal">
-                  Lorem Ipsum has been the industry's standard dummy text
-                </p>
-              </div>
-              <div class="col-sm-6">
-                <div class="position-relative image-hover">
-                  <img src="./assets/images/salud/noticia5.jpg"class="img-fluid"/>
-                  <span onclick="location.href='./noticia.php'" class="thumb-title">Ver nota</span>
-
-                </div>
-                <h5 class="font-weight-600 mt-3">¿Cuál es el vínculo entre la hipertensión arterial y la diabetes?</h5>
-                <p class="fs-15 font-weight-normal">
-                  Lorem Ipsum has been the industry's standard dummy text
-                </p>
-              </div>
-            </div>
           </div>
-        </div>
+          </form>
+          <?php }?>
+          
+        
+
+
+         
         <div class="row mt-5">
           <div class="col-sm-12">
             <h5 class="text-muted font-weight-medium mb-3">Más Populares</h5>
           </div>
         </div>
         <div class="row mb-4">
+        <?php foreach($populares as $index => $n){ 
+                  $n_images=$d->getImgPrincDash($n["NEWS_ID"]);?>
+        
           <div class="col-sm-3  mb-5 mb-sm-2">
             <div class="position-relative image-hover">
-              <img src="./assets/images/salud/salud.jpg"class="img-fluid"/>
-              <span onclick="location.href='./noticia.php'" class="thumb-title">Ver nota</span>
-
+            <input type="text" style="display:none" id="news_id"name="news_id" value="<?php echo $n["NEWS_ID"]?>">
+            <?php foreach($n_images as $index => $i){
+                              if ($index === array_key_first($n_images)){
+                                ?>
+              <img src="<?php echo $i["IMAGE_BLOB"]?>"class="img-fluid"/>
+              <input type="submit" name="detalleDash" id="detalleDash" class="thumb-title"value ="Ver nota">
+              <?php }}
+                            ?>
             </div>
-            <h6 class="font-weight-600 mt-3">Ejemplo noticia</h6>
+            <h6 class="font-weight-600 mt-3"><?php echo $n["TITLE"]?></h6>
           </div>
           
-          <div class="col-sm-3  mb-5 mb-sm-2">
-            <div class="position-relative image-hover">
-            <img src="./assets/images/salud/salud.jpg"class="img-fluid"/>
-            <span onclick="location.href='./noticia.php'" class="thumb-title">Ver nota</span>
+          <?php } ?>
 
-            </div>
-            <h6 class="font-weight-600 mt-3">Ejemplo noticia</h6>
           </div>
-
-          <div class="col-sm-3  mb-5 mb-sm-2">
-            <div class="position-relative image-hover">
-            <img src="./assets/images/salud/salud.jpg"class="img-fluid"/>
-            <span onclick="location.href='./noticia.php'" class="thumb-title">Ver nota</span>
-
-            </div>
-            <h6 class="font-weight-600 mt-3">Ejemplo noticia</h6>
-          </div>
-
-          <div class="col-sm-3  mb-5 mb-sm-2">
-            <div class="position-relative image-hover">
-            <img src="./assets/images/salud/salud.jpg"class="img-fluid"/>
-            <span onclick="location.href='./noticia.php'" class="thumb-title">Ver nota</span>
-
-            </div>
-            <h6 class="font-weight-600 mt-3">Ejemplo noticia</h6>
-          </div>
-        
-        <div class="row mb-4">
-        <div class="col-sm-3  mb-5 mb-sm-2">
-            <div class="position-relative image-hover">
-            <img src="./assets/images/salud/salud.jpg"class="img-fluid"/>
-            <span onclick="location.href='./noticia.php'" class="thumb-title">Ver nota</span>
-
-            </div>
-            <h6 class="font-weight-600 mt-3">Ejemplo noticia</h6>
-          </div>
-
-          <div class="col-sm-3  mb-5 mb-sm-2">
-            <div class="position-relative image-hover">
-            <img src="./assets/images/salud/salud.jpg"class="img-fluid"/>
-            <span onclick="location.href='./noticia.php'" class="thumb-title">Ver nota</span>
-
-            </div>
-            <h6 class="font-weight-600 mt-3">Ejemplo noticia</h6>
-          </div>
-
-          <div class="col-sm-3  mb-5 mb-sm-2">
-            <div class="position-relative image-hover">
-            <img src="./assets/images/salud/salud.jpg"class="img-fluid"/>
-            <span onclick="location.href='./noticia.php'" class="thumb-title">Ver nota</span>
-
-            </div>
-            <h6 class="font-weight-600 mt-3">Ejemplo noticia</h6>
-          </div>
-
-          <div class="col-sm-3  mb-5 mb-sm-2">
-            <div class="position-relative image-hover">
-            <img src="./assets/images/salud/salud.jpg"class="img-fluid"/>
-            <span onclick="location.href='./noticia.php'" class="thumb-title">Ver nota</span>
-
-            </div>
-            <h6 class="font-weight-600 mt-3">Ejemplo noticia</h6>
-          </div>
-
-        
         </div>
+        </div>
+
       </div>
       <div class="btn_group_colors" >
           <button type="button" class="btn btn-primary rounded morado" style="background: purple;"></button>

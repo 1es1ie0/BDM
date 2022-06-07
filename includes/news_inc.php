@@ -201,6 +201,13 @@ if(isset($_POST["submit"])){
         $searchnews->delComentario();
         header('refresh:0.1;url=../noticia.php?error=none');
     }
+    else if(isset($_POST["secciones"])){
+        $sectionID = $_POST["section_id"];
+
+        $db =new NewsConn();
+        $section = $db->getNewsSection($sectionID);
+        header('refresh:0.1;url=../salud.php?error=none');
+    }
     
 
 

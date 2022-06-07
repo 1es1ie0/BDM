@@ -397,7 +397,22 @@ class NewsConn extends Dbh{
 
     }
     
-   
+    public function getNewsSection($sectionID){
+        $stmt = $this->connect()->prepare('CALL P_GET_NEWS_SECTION(?);');
+
+
+        if(!$stmt->execute(array($sectionID))){
+            $stmt = null;
+            header('refresh:0.1;url=../buscador.php?error=stmtFailed');
+            exit();
+        }
+        $n = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        session_start();
+        $_SESSION["NEWS_SECTION"]= $n;
+        
+        $stmt = null;
+        return $n;
+    }
 }
 
 ?>

@@ -29,7 +29,6 @@
                 <br>
               <h1 class="text-center mt-5">Deportes</h1>
             </div>
-            <h5 class="text-muted font-weight-medium mb-3">Noticias Deportes</h5>
           </div>
         </div>
         <div class="row">
@@ -101,6 +100,8 @@
             <h5 class="text-muted font-weight-medium mb-3">Más Populares</h5>
           </div>
         </div>
+
+        
         <div class="row mb-4">
           <div class="col-sm-3  mb-5 mb-sm-2">
             <div class="position-relative image-hover">
